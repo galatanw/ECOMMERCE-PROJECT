@@ -1,14 +1,9 @@
+require('dotenv').config()
 const mongo = require("mongodb"),
-  url = "mongodb://localhost:27017/",
+  url = process.env.MONGO_DEV_URL,
   client = mongo.MongoClient.connect(url),
   dbName = "ecommerce",
   collection = "products";
-
-
-
-
-
-
 
   // -------------------
 function addingProduct(req, res) {

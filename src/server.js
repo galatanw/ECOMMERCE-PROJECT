@@ -1,7 +1,8 @@
+require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const app = express();
-const PORT = 8080;
+const PORT=process.env.PORT;
 const publicPath = path.join(__dirname, "..", "public");
 app.use(express.static(publicPath));
 const products=require("./products");
