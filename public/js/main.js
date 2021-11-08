@@ -118,7 +118,7 @@ function sortBySelect(kind) {
       break;
     default:
       axios.get(`/products/${category}`).then((res) => {
-        const sortedData = res.data.sort((a, b) => a.sale - b.sale);
+        const sortedData = res.data.sort((a, b) => b.sale - a.sale);
         for (const iterator of sortedData) {
           if (iterator.sale == 0) {
           } else {
@@ -134,6 +134,7 @@ function sortBySelect(kind) {
             <h3>final Price:${
               iterator.price - (iterator.price * iterator.sale) / 100
             } $</h3>
+            <h2><span style="color:red">SALE:</sapn><span style="color:gold">${iterator.sale}%</span></h2>
              </div>
               `;
             i++;
