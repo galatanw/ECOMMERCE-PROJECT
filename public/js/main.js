@@ -20,6 +20,7 @@ function getCategory() {
           <h3>final Price:${
             iterator.price - (iterator.price * iterator.sale) / 100
           } $</h3>
+          <a href="/singleProudct/${iterator._id}"><input type="button" value="Details"></a>
            </div>
           `;
       i++;
@@ -144,7 +145,6 @@ function sortBySelect(kind) {
       break;
   }
 }
-
 
 document.getElementById("resetFilter").onclick=()=>{
   productsImages = [];

@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Mina:400,700');
+*{
+  margin: 0;
+  padding: 0;
+}
+body { margin:0;padding:0;font-family: 'Mina', sans-serif;}
+.row {margin: 0; padding: 0; max-width: 100%;}
+.row .row {margin: 0; padding: 0;}
+.row .columns {padding: 0;}
+a {color: #2b9580;}
+a:hover {color: #2fc6a8;}
+body, h1, h2, h3, h4, h5, h6 {font-family: 'Mina', sans-serif; font-weight: 700;}
+h1 {font-size: 1.75em; }
+h2 {font-size: 1.5em;}
+
+.product-hero {
+  display: flex;
+  color: #fff;
+  width: 100%;
+  max-width: 100%;
+  max-height: 85vh;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  background-position: center center;
+  background-repeat: repeat;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.product-hero img {max-height: 85vh; max-width: 100%;
+box-shadow: 2vh 2vh 5vh white;}
+
+.blocks {display: flex;}
+.block {padding:35px; width: 50%;}
+.block.nopad {padding: 0;}
+
+.options {padding: 35px;}
+.options h2 {font-size: 1.25em;}
+.price {text-align: right; font-size: 1.75em; font-weight: 700;}
+.artist {margin-bottom: 5px;}
+.detail {
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* start color/sizes styles */
+.colors, .sizes {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: -5px;
+}
+.colors span, .sizes span {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin: 5px
+}
+/* .colors span:first-child, .sizes span:first-child {margin-left: 0;} */
+.colors {margin-bottom: 25px;}
+.colors span {
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 3px rgb(0, 0, 0, 0);
+  transition: border-color .15s ease-out;
+  cursor:pointer;
+}
+.colors span:hover {border-color: orange;}
+.colors .active {
+  box-shadow: 0 0 0 3px rgb(0, 0, 0, 1);
+}
+
+/* sizes */
+.sizes span {
+  border: 0px solid #fff;
+  box-shadow: 0 0 0 2px rgb(200, 200, 200, 1);
+  transition: box-shadow .15s ease-out;
+  cursor: pointer;
+  font-weight: 700;
+}
+.sizes span:hover {box-shadow: 0 0 0 5px rgb(255, 177, 92, 1);cursor:pointer;}
+.sizes .active {
+  background-color: #494949;
+  color: #fff;
+}
+/* end color/sizes styles */
+
+.add-to-cart {width: 100%; background: black; border: 0; font-weight: bold; font-family: "Mina", Helvetica, sans-serif; font-size: 1.4em;}
+.add-to-cart:hover {background: #333;}
+
+/* artist info */
+.artist-block {border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; flex-direction: row; }
+@media only screen and (max-width: 700px) {
+  .side-by-side {flex-direction: column;}
+  .side-by-side .block {width: 100%;}
+  .block.our-artists {border-top: 1px solid #ccc; border-left: 0px;}
+  .detail {min-height: 600px;}
+}
+.artist-block .block {padding: 30px; align-items: center;}
+.artist-info {
+  display: flex;
+  align-content: center;
+}
+.block.artist-avatar, .block.artist-details {padding: 10px;}
+.block.artist-avatar {width: 25%;}
+.block.artist-details {width: 75%;}
+.block.artist-details p:last-child {margin-bottom: 0;}
+.artist-avatar {/*align-self: center;*/ text-align:right;}
+.block.our-artists {
+  border-left: 1px solid #ccc;
+  padding: 30px; 
+  background: url('https://cdn.shopify.com/s/files/1/0739/9215/files/artist-community-bg.jpg?8987201676746014667') no-repeat -100px center;
+  background-size: auto;
+  display: flex;
+  align-content: center;
+}
+.our-artists h4, .our-artists img {margin-bottom: 0;}
+.our-artists .block {align-self: center;}
+.our-artists .block:first-child {width: 70%; padding-right: 20px;}
+.our-artists .block:last-child {width: 30%; }

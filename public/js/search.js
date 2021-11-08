@@ -12,7 +12,7 @@ search.addEventListener("keyup",()=>{
         searchForm.innerHTML=""
     for (const iterator of res.data) {
         if(iterator.description.match(value)){
-            searchForm.innerHTML+=`<a onclick="closeCart()" style="background-color: brown; width:100px;" href="#${iterator.description}"><li >${iterator.description}</li></a><hr>`
+            searchForm.innerHTML+=`<a href="/singleProudct/${iterator._id}" style="background-color: brown; width:100px;"><li>${iterator.description}</li></a><hr>`
         }
     }
     })

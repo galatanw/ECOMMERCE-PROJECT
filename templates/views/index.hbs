@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/singleProduct.css">
+    <link rel="stylesheet" href="../css/header.css">
+</head>
+<body>
+  <header>
+    <div id="nav">
+        <h1 id="myName" style="color: white;">GAL ATNAW</h1>
+        <div id="menuBurger">
+            <div class="menuBurgerBtn"></div>
+        </div>
+        </div>
+        <nav>
+            <ul id="navUl">
+                <li ><a href="/computer"><p class="Navtext">COMPUTER</p></a></li>
+                <li ><a href="/laptop"><p class="Navtext">LAPTOPS</p></a></li>
+                <li ><a href="/audio"><p class="Navtext">AUDIO</p></a></li>
+                <li ><a href="/hardwear"><p class="Navtext">HARDWEAR</p></a></li>
+            </ul>
+        </nav>
+        <div id="searchContainer">
+            <input id="search" type="search" placeholder="search">
+            <ul id="searchForm">
+            </ul>
+        </div>
+        
+</header>
+    <div class="row product-hero" >
+        <div class="columns medium-12">
+          <img src="{{firstImage}}" alt="">
+        </div>
+      </div>
+      <div class="row blocks side-by-side">
+        <div class="block options" style="background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply;">
+          <div class="row">
+            <div class="columns medium-7 title">
+              <h1>{{description}}</h1>
+            </div>
+            <div class="columns medium-5 price">
+              ${{price}}
+            </div>
+          </div>
+      
+      
+          <h2>description:</h2>
+          <p>{{color}}</p>
+          <p>{{weight}}</p>
+          <p>{{one}}</p>
+          <p>{{two}}</p>
+   
+      
+          <button class="add-to-cart orange unavailable">Add To Cart</button>
+      
+        </div>
+        <div class="block detail" style="background-image:url('{{secondImage}}')"></div>
+      </div>
+      
+      <!-- slider and product details -->
+      <div class="blocks side-by-side">
+        <div class="block nopad">
+          <img src="{{thirdImage}}" alt="">
+        </div>
+        <div style="background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply;" class="block">
+            
+        </div>
+      </div>
+      
+      <!-- Artist Information -->
+      <div class="blocks side-by-side artist-block">
+        <div class="block artist-info" style="background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply;">
+          <div class="blocks">
+            <div class="block artist-avatar"><img src="{{logo}}" alt=""></div>
+            <div class="block artist-details">
+              <h4>About me:</h4>
+              <p><a href="https://github.com/galatanw">gal atanw</a></p>
+              <p>softwate developer, fan of music, movies, sports and pop culture.  HTML JavaScript NODE.JS mobgoDB.</p>
+            </div>
+          </div>
+      
+        </div>
+        <div class="block our-artists">
+          <div class="blocks" >
+            <div class="block" >
+              <h5>MAKE THE WORLD GREAT AGAIN</h5>
+            </div>
+            <div class="block">
+              <img src={{logo}} alt="">
+            </div>
+          </div>    
+        </div>
+      </div>   
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="../js/search.js"></script>
+</body>
+</html>

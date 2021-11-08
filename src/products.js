@@ -1,11 +1,11 @@
-require('dotenv').config()
+require("dotenv").config();
 const mongo = require("mongodb"),
   url = process.env.MONGO_DEV_URL,
   client = mongo.MongoClient.connect(url),
-  dbName = "ecommerce",
-  collection = "products";
+  ObjectId = mongo.ObjectId;
+(dbName = "ecommerce"), (collection = "products");
 
-  // -------------------
+// -------------------
 function addingProduct(req, res) {
   let body = req.body;
   for (const key in body) {
@@ -57,19 +57,14 @@ function addingProduct(req, res) {
     });
 }
 
-
-
-
-
-
 // -----------------------------------------
-function fullCategoryData(req, res,filter) {
+function fullCategoryData(req, res, filter) {
   client
     .then((db) => {
       const dbo = db.db(dbName);
       dbo
         .collection(collection)
-        .find({category:filter})
+        .find({ category: filter })
         .toArray()
         .then((data) => {
           return res.send(data);
@@ -81,14 +76,9 @@ function fullCategoryData(req, res,filter) {
     });
 }
 
-
-
-
-
-
 // ------------------------------------------------
 
-function fullProductsData(req, res,filter) {
+function fullProductsData(req, res, filter) {
   client
     .then((db) => {
       const dbo = db.db(dbName);
@@ -167,9 +157,6 @@ function UpdateProduct(req, res) {
     });
 }
 
-
-
-
 // ------------------------------------
 function deleteProduct(req, res) {
   const ID = req.params.id;
@@ -192,10 +179,41 @@ function deleteProduct(req, res) {
     });
 }
 
+function SingleproductHbs(req, res) {
+  const ID = req.params.id;
+  client
+    .then((db) => {
+      const dbo = db.db(dbName);
+      dbo
+        .collection(collection)
+        .findOne({ _id: ObjectId(ID) })
+        .then((data) => {
+          res.render("index", {
+            description: data.description,
+            price: data.price,
+            color: data.color,
+            weight: data.WEIGHT,
+            one: data.one,
+            two: data.two,
+            firstImage:data.images[0],
+            secondImage:data.images[1],
+            thirdImage:data.images[2],
+            fourImage:data.images[3],
+            logo:"https://i.ibb.co/JqRWZS8/77fb4fdce8db4ce58087c6792dd09418.png"
+          });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(404).send(`this ID does not match with any product`);
+    });
+}
+
 module.exports = {
   fullCategoryData,
   addingProduct,
   UpdateProduct,
   deleteProduct,
-  fullProductsData
+  fullProductsData,
+  SingleproductHbs
 };
