@@ -199,7 +199,42 @@ function SingleproductHbs(req, res) {
             secondImage:data.images[1],
             thirdImage:data.images[2],
             fourImage:data.images[3],
+            product:true,
             logo:"https://i.ibb.co/JqRWZS8/77fb4fdce8db4ce58087c6792dd09418.png"
+          });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(404).send(`this ID does not match with any product`);
+    });
+}
+
+function updateSingleProduct(req,res) {
+  const ID = req.params.id;
+  console.log(ID);
+  client
+    .then((db) => {
+      const dbo = db.db(dbName);
+      dbo
+        .collection(collection)
+        .findOne({ _id: ObjectId(ID) })
+        .then((data) => {
+          console.log(data);
+          res.render("index", {
+            sale:data.sale,
+            brand:data.brand,
+            category:data.category,
+            insurance:data.INSURANCE,
+            qnt:data.qnt,
+            description: data.description,
+            price: data.price,
+            color: data.color,
+            weight: data.WEIGHT,
+            one: data.one,
+            two: data.two,
+            Image:data.images[0],
+            update:true,
           });
         });
     })
@@ -215,5 +250,6 @@ module.exports = {
   UpdateProduct,
   deleteProduct,
   fullProductsData,
-  SingleproductHbs
+  SingleproductHbs,
+  updateSingleProduct
 };

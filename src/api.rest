@@ -1,1 +1,1 @@
-GET http://localhost:/singleProduct/61818a7f9d99f9bd51d002cb
+GET http://localhost:2000/singleProductUpdate/61818f289500713567cf5a6d

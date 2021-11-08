@@ -12,8 +12,8 @@ function getCategory() {
       div.innerHTML += `
           <div id="${iterator.description}" class="productsPreview">
           <img class="images" onmouseleave="hoverOut(${i})" onmouseenter="hoverImage(${i})" src="${
-        iterator.images[0]
-      }">
+            iterator.images[0]
+          }">
           <br>
           <h2>${iterator.description}</h2>
           <hr>
@@ -21,6 +21,7 @@ function getCategory() {
             iterator.price - (iterator.price * iterator.sale) / 100
           } $</h3>
           <a href="/singleProudct/${iterator._id}"><input type="button" value="Details"></a>
+          <a href="/singleProductUpdate/${iterator._id}"><input type="button" value="update"></a>
            </div>
           `;
       i++;

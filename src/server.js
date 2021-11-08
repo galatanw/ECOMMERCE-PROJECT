@@ -36,7 +36,9 @@ app.get('/products/:category',(req,res)=>{
 })
 
 
-
+app.get("/singleProductUpdate/:id",(req,res)=>{
+products.updateSingleProduct(req,res)  
+})
 
 
 
