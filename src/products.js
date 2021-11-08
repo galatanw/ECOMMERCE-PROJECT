@@ -8,6 +8,7 @@ const mongo = require("mongodb"),
 // -------------------
 function addingProduct(req, res) {
   let body = req.body;
+  console.log(body);
   for (const key in body) {
     const element = body[key];
     if (key == "images") {
@@ -45,7 +46,7 @@ function addingProduct(req, res) {
           sale: body.sale,
           category: body.category,
           one: body.one,
-          two: body.two,
+          two: body.two
         })
         .then((data) => {
           return res.send(data);
@@ -59,12 +60,13 @@ function addingProduct(req, res) {
 
 // -----------------------------------------
 function fullCategoryData(req, res, filter) {
+  console.log(1);
   client
     .then((db) => {
       const dbo = db.db(dbName);
       dbo
         .collection(collection)
-        .find({ category: filter })
+        .find({category: filter})
         .toArray()
         .then((data) => {
           return res.send(data);
@@ -78,7 +80,7 @@ function fullCategoryData(req, res, filter) {
 
 // ------------------------------------------------
 
-function fullProductsData(req, res, filter) {
+function fullProductsData(req, res) {
   client
     .then((db) => {
       const dbo = db.db(dbName);
@@ -97,8 +99,8 @@ function fullProductsData(req, res, filter) {
 }
 
 // ---------------------------
-function UpdateProduct(req, res) {
-  let body = req.body;
+function UpdateProduct(req,res){
+  let body=req.body;
   for (const key in body) {
     const element = body[key];
     if (key == "images") {
@@ -129,11 +131,11 @@ function UpdateProduct(req, res) {
           { _id: mongo.ObjectId(ID) },
           {
             $set: {
-              WEIGHT: body.WEIGHT,
+              WEIGHT: body.weight,
               color: body.color,
               description: body.description,
               images: body.images,
-              INSURANCE: body.INSURANCE,
+              INSURANCE: body.insurance,
               price: body.price,
               brand: body.brand,
               qnt: body.qnt,
@@ -179,6 +181,11 @@ function deleteProduct(req, res) {
     });
 }
 
+
+
+// ----------------------------------------
+
+
 function SingleproductHbs(req, res) {
   const ID = req.params.id;
   client
@@ -195,12 +202,13 @@ function SingleproductHbs(req, res) {
             weight: data.WEIGHT,
             one: data.one,
             two: data.two,
-            firstImage:data.images[0],
-            secondImage:data.images[1],
-            thirdImage:data.images[2],
-            fourImage:data.images[3],
-            product:true,
-            logo:"https://i.ibb.co/JqRWZS8/77fb4fdce8db4ce58087c6792dd09418.png"
+            firstImage: data.images[0],
+            secondImage: data.images[1],
+            thirdImage: data.images[2],
+            fourImage: data.images[3],
+            product: true,
+            ID:ID,
+            logo: "https://i.ibb.co/JqRWZS8/77fb4fdce8db4ce58087c6792dd09418.png",
           });
         });
     })
@@ -210,9 +218,16 @@ function SingleproductHbs(req, res) {
     });
 }
 
-function updateSingleProduct(req,res) {
+
+
+
+
+
+// ------------------------------------------
+
+
+function updateSingleProduct(req, res) {
   const ID = req.params.id;
-  console.log(ID);
   client
     .then((db) => {
       const dbo = db.db(dbName);
@@ -220,21 +235,25 @@ function updateSingleProduct(req,res) {
         .collection(collection)
         .findOne({ _id: ObjectId(ID) })
         .then((data) => {
-          console.log(data);
           res.render("index", {
-            sale:data.sale,
-            brand:data.brand,
-            category:data.category,
-            insurance:data.INSURANCE,
-            qnt:data.qnt,
+            sale: data.sale,
+            brand: data.brand,
+            category: data.category,
+            insurance: data.INSURANCE,
+            qnt: data.qnt,
             description: data.description,
             price: data.price,
             color: data.color,
             weight: data.WEIGHT,
             one: data.one,
             two: data.two,
-            Image:data.images[0],
-            update:true,
+            Image: data.images[0],
+            update: true,
+            ID: ID,
+            image1:data.images[0],
+            image2:data.images[1],
+            image3:data.images[2],
+            image4:data.images[3]
           });
         });
     })
@@ -243,6 +262,27 @@ function updateSingleProduct(req,res) {
       return res.status(404).send(`this ID does not match with any product`);
     });
 }
+
+
+// ----------------------------------------------------
+function Singleproduct(req, res) {
+  const ID = req.params.id;
+  client
+    .then((db) => {
+      const dbo = db.db(dbName);
+      dbo
+        .collection(collection)
+        .findOne({ _id: ObjectId(ID) })
+        .then((data) => {
+          res.send(data)
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(404).send(`this ID does not match with any product`);
+    });
+})
+}
+
 
 module.exports = {
   fullCategoryData,
@@ -251,5 +291,6 @@ module.exports = {
   deleteProduct,
   fullProductsData,
   SingleproductHbs,
-  updateSingleProduct
+  Singleproduct,
+  updateSingleProduct,
 };

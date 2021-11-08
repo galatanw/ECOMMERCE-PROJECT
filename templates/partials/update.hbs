@@ -6,37 +6,49 @@
         <div class="login-form">
           <div class="sign-in-htm">
             <div class="group">
-              <p id="user" type="text" class="input">{{description}}</p>
+              <p id="user" type="text" class="styledFields">{{description}}</p>
             </div>
             <div class="group">
-              <p class="input">price-{{price}}</p>
+              <p class="styledFields">price-{{price}}</p>
             </div>
             <div class="group">
-              <p class="input">sale-{{sale}}%</p>
+              <p class="styledFields">sale-{{sale}}%</p>
             </div>
             <div class="group">
-              <p class="input">category-{{category}}</p>
+              <p class="styledFields">category-{{category}}</p>
             </div>
             <div class="group">
-              <p class="input">brand-{{brand}}</p>
+              <p class="styledFields">brand-{{brand}}</p>
             </div>
             <div class="group">
-              <p class="input">weight-{{weight}}</p>
+              <p class="styledFields">weight-{{weight}}</p>
             </div>
             <div class="group">
-              <p class="input">insurance-{{insurance}}</p>
+              <p class="styledFields">insurance-{{insurance}}</p>
             </div>
             <div class="group">
-              <p class="input">color-{{color}}</p>
+              <p class="styledFields">color-{{color}}</p>
             </div>
             <div class="group">
-              <p class="input">extra-{{one}}</p>
+              <p class="styledFields">extra-{{one}}</p>
             </div>
             <div class="group">
-              <p class="input">extra-{{two}}</p>
+              <p class="styledFields">extra-{{two}}</p>
             </div>
             <div class="group">
-              <p class="input">quantity-{{qnt}} units</p>
+              <p class="styledFields">quantity-{{qnt}} units</p>
+            </div>
+             <div class="group">
+              <p class="styledFields">image1-{{image1}}</p>
+            </div>
+             <div class="group">
+              <p class="styledFields">image2-{{image2}}</p>
+            </div>
+             <div class="group">
+              <p class="styledFields">image3-{{image3}}</p>
+              </div>
+             <div class="group">
+              <p class="styledFields">image4-{{image4}}</p>
             </div>
             <div class="hr"></div>
            
@@ -44,44 +56,68 @@
           <div class="sign-up-htm">
             <div class="group">
               <label for="user" class="label">description</label>
-              <input name="description" placeholder="description" type="text" class="input">
+              <input name="description" placeholder="description" type="text" class="styledFields insertInput">
             </div>
             <div class="group">
               <label for="pass" class="label">price</label>
-              <input name="price" placeholder="price" type="text" class="input">
+              <input name="price" placeholder="price" type="number" class="styledFields insertInput">
             </div>
             <div class="group">
               <label for="pass" class="label">sale</label>
-              <input name="sale" type="password" class="input" >
+              <input name="sale" type="number" class="styledFields insertInput" >
             </div>
             <div class="group">
               <label for="pass" class="label">category</label>
-              <input name="category" type="text" placeholder="category" class="input">
+              <input name="category" type="text" placeholder="category" class="styledFields insertInput">
             </div>
             <div class="group">
               <label for="pass" class="label">brand</label>
-              <input name="brand" type="text" placeholder="brand" class="input">
+              <input name="brand" type="text" placeholder="brand" class="styledFields insertInput">
             </div>
             <div class="group">
               <label for="pass" class="label">weight</label>
-              <input name="weight" type="text" placeholder="weight" class="input">
+              <input name="weight" type="text" placeholder="weight" class="styledFields insertInput">
+            </div>
+            <div class="group">
+              <label for="pass" class="label">insurance</label>
+              <input name="insurance" type="text" placeholder="insurance" class="styledFields insertInput">
             </div>
             <div class="group">
               <label for="pass" class="label">color</label>
-              <input name="color" type="text" placeholder="color" class="input">
+              <input name="color" type="text" placeholder="color" class="styledFields insertInput">
             </div>
             <div class="group">
               <label for="pass" class="label">one</label>
-              <input name="one" type="text" placeholder="one" class="input">
+              <input name="one" type="text" placeholder="one" class="styledFields insertInput">
             </div>
             <div class="group">
               <label for="pass" class="label">two</label>
-              <input name="two" type="text" placeholder="two" class="input">
+              <input name="two" type="text" placeholder="two" class="styledFields insertInput">
             </div>
             <div class="group">
               <label for="pass" class="label">qnt</label>
-              <input name="qnt" type="text" placeholder="qnt" class="input">
+              <input name="qnt" type="number" placeholder="qnt" class="styledFields insertInput">
             </div>
+             <div class="group">
+              <label for="pass" class="label">image1</label>
+              <input name="image" type="text" placeholder="image" class="styledFields insertInput">
+            </div>
+             <div class="group">
+              <label for="pass" class="label">image2</label>
+              <input name="image" type="text" placeholder="image" class="styledFields insertInput">
+            </div>
+             <div class="group">
+              <label for="pass" class="label">image3</label>
+              <input name="image" type="text" placeholder="image" class="styledFields insertInput">
+            </div>
+             <div class="group">
+              <label for="pass" class="label">image4</label>
+              <input name="image" type="text" placeholder="image" class="styledFields insertInput">
+            </div>
+            <div class="group">
+                  <input onclick="updateProduct('{{ID}}')" type="button" value="submit">
+            </div>
+
           </div>
         </div>
       </div>

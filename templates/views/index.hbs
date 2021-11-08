@@ -30,7 +30,7 @@
             </ul>
         </nav>
         <div id="searchContainer">
-            <input id="search" type="search" placeholder="search">
+            <input  id="search" type="search" placeholder="search" >
             <ul id="searchForm">
             </ul>
         </div>   
@@ -42,6 +42,12 @@
   {{>update}}
 {{/if}}
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{{#if product}}
+      <script src="../js/detailProduct.js"></script>
+{{/if}}
+{{#if update}}
+      <script src="../js/updateProduct.js"></script>
+{{/if}}
       <script src="../js/search.js"></script>
 </body>
 </html>

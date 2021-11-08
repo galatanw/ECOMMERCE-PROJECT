@@ -4,10 +4,12 @@ console.log(category);
 const div = document.getElementById("products");
 let i = 0;
 function getCategory() {
+  console.log(1);
   axios 
   .get(`/products/${category}`)
   .then((res) => {
     for (const iterator of res.data) {
+      console.log(1,iterator);
       productsImages.push([iterator.images[0], iterator.images[1]]);
       div.innerHTML += `
           <div id="${iterator.description}" class="productsPreview">
@@ -20,7 +22,7 @@ function getCategory() {
           <h3>final Price:${
             iterator.price - (iterator.price * iterator.sale) / 100
           } $</h3>
-          <a href="/singleProudct/${iterator._id}"><input type="button" value="Details"></a>
+          <a href="/singleProudctHbs/${iterator._id}"><input type="button" value="Details"></a>
           <a href="/singleProductUpdate/${iterator._id}"><input type="button" value="update"></a>
            </div>
           `;

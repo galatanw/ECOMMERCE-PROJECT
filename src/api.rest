@@ -1,1 +1,11 @@
-GET http://localhost:2000/singleProductUpdate/61818f289500713567cf5a6d
+GET http://localhost:2000/carts
+###
+PATCH  http://localhost:2000/carts
+Content-Type: application/json
+
+{
+"id":"61818f289500713567cf5a6d",
+"price":4000,
+"sale":10,
+"finalPrice":3600
+}
