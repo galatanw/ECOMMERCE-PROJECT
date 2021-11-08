@@ -1,38 +1,153 @@
-let products;
-const div=document.getElementById("pictures")
-let i=0
-axios
-.get('/products')
-.then((res)=>{
-    // product=res.data
+let productsImages = [];
+category = document.getElementById('titleName').innerText;
+console.log(category);
+const div = document.getElementById("products");
+let i = 0;
+function getCategory() {
+  axios 
+  .get(`/products/${category}`)
+  .then((res) => {
     for (const iterator of res.data) {
-        console.log(res);
-        console.log(iterator);
-        div.innerHTML+=
-        `
-        <div class="productContainer" id="${iterator.description}">
-        <h3 class="productTitle">${iterator.description}</h3 >
-        <button><p class="infoBtnText" style="text-decoration: underline; color: grey;  ">read more</p></button>
-        <button style="background-color:blueviolet; border-radius: 10%;"><p class="Cart" style="font-weight: 500; color: orange;  ">Cart+</p></button>
-        <button style="background-color:blueviolet; border-radius: 10%;"><p class="Cart" style="font-weight: 500; color: orange;  ">WISH+</p></button>
-        <img src="${iterator.images[0]}" class="productImgMain" id="mainImg">
-        <p class="productInfo">
-              <span> COLOR-</span>${iterator.color}<br><br>
-                <span>WEIGHT-</span>${iterator.WEIGHT}<br><br>
-                <span>$-</span>${iterator.one}<br><br>
-                <span>$-</span> ${iterator.two}<br><br>
-                <span>INSURANCE-</span>${iterator.INSURANCE}<br><br>
-                <span>PRICE-</span><span class="price">${iterator.price} </span><span class="salePres">${iterator.sale}%OFF  <span class="saledPriced">${iterator.sale}</span<br><br>
-             </p>
-             <img src="${iterator.images[0]}"    class="smallProductImg ">
-             <img src="${iterator.images[1]}"    class="smallProductImg ">
-             <img src="${iterator.images[2]}"    class="smallProductImg ">
-             <img src="${iterator.images[3]}"   class="smallProductImg">
-             </div>
-        `
-        i++
-        
+      productsImages.push([iterator.images[0], iterator.images[1]]);
+      div.innerHTML += `
+          <div id="${iterator.description}" class="productsPreview">
+          <img class="images" onmouseleave="hoverOut(${i})" onmouseenter="hoverImage(${i})" src="${
+        iterator.images[0]
+      }">
+          <br>
+          <h2>${iterator.description}</h2>
+          <hr>
+          <h3>final Price:${
+            iterator.price - (iterator.price * iterator.sale) / 100
+          } $</h3>
+           </div>
+          `;
+      i++;
     }
-console.log(document.getElementById('mainImg').getAttribute('src') );
+  });
+}
+getCategory(category);
+const pics = document.getElementsByClassName("images");
+function hoverImage(x) {
+  pics[x].src = `${productsImages[x][1]}`;
+}
+function hoverOut(x) {
+  pics[x].src = `${productsImages[x][0]}`;
+}
 
-})
+const filter = document.getElementById("filter");
+filter.addEventListener("change", () => {
+  div.innerHTML = "";
+  switch (filter.value) {
+    case "high to low":
+      {
+        sortBySelect("highest");
+      }
+      break;
+    case "low to high":
+      sortBySelect("lowest");
+      break;
+    case "SALE":
+      sortBySelect("DEFAULT");
+      break;
+    default:
+      getCategory(category);
+      break;
+  }
+});
+
+function sortBySelect(kind) {
+  productsImages = [];
+  i = 0;
+  switch (kind) {
+    case "lowest":
+      axios.get(`/products/${category}`).then((res) => {
+        const sortedData = res.data.sort(
+          (a, b) =>
+            a.price -
+            (a.price * a.sale) / 100 -
+            b.price -
+            (b.price * b.sale) / 100
+        );
+        for (const iterator of sortedData) {
+          productsImages.push([iterator.images[0], iterator.images[1]]);
+          div.innerHTML += `
+          <div id="${iterator.description}" class="productsPreview">
+          <img class="images" onmouseleave="hoverOut(${i})" onmouseenter="hoverImage(${i})" src="${
+            iterator.images[0]
+          }">
+          <br>
+          <h2>${iterator.description}</h2>
+          <hr>
+          <h3>final Price:${
+            iterator.price - (iterator.price * iterator.sale) / 100
+          } $</h3>
+           </div>
+              `;
+          i++;
+        }
+      });
+      break;
+    case "highest":
+      axios.get(`/products/${category}`).then((res) => {
+        const sortedData = res.data.sort(
+          (a, b) =>
+            b.price -
+            (b.price * b.sale) / 100 -
+            a.price -
+            (a.price * a.sale) / 100
+        );
+        for (const iterator of sortedData) {
+          productsImages.push([iterator.images[0], iterator.images[1]]);
+          div.innerHTML += `
+          <div id="${iterator.description}" class="productsPreview">
+          <img class="images" onmouseleave="hoverOut(${i})" onmouseenter="hoverImage(${i})" src="${
+            iterator.images[0]
+          }">
+          <br>
+          <h2>${iterator.description}</h2>
+          <hr>
+          <h3>final Price:${
+            iterator.price - (iterator.price * iterator.sale) / 100
+          } $</h3>
+           </div>
+            `;
+          i++;
+        }
+      });
+      break;
+    default:
+      axios.get(`/products/${category}`).then((res) => {
+        const sortedData = res.data.sort((a, b) => a.sale - b.sale);
+        for (const iterator of sortedData) {
+          if (iterator.sale == 0) {
+          } else {
+            productsImages.push([iterator.images[0], iterator.images[1]]);
+            div.innerHTML += `
+            <div id="${iterator.description}" class="productsPreview">
+            <img class="images" onmouseleave="hoverOut(${i})" onmouseenter="hoverImage(${i})" src="${
+              iterator.images[0]
+            }">
+            <br>
+            <h2>${iterator.description}</h2>
+            <hr>
+            <h3>final Price:${
+              iterator.price - (iterator.price * iterator.sale) / 100
+            } $</h3>
+             </div>
+              `;
+            i++;
+          }
+        }
+      });
+      break;
+  }
+}
+
+
+document.getElementById("resetFilter").onclick=()=>{
+  productsImages = [];
+  div.innerHTML = "";
+  i = 0;
+  getCategory(category)
+}

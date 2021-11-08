@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title  id="titleName">laptop</title>
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/indexStyle.css">
+    <link rel="stylesheet" href="css/products.css">
 </head>
 <body>
 <header>
     <div id="nav">
+        <h1 id="myName" style="color: white;">GAL ATNAW</h1>
         <div id="menuBurger">
             <div class="menuBurgerBtn"></div>
         </div>
@@ -20,7 +21,7 @@
                 <li ><a href="/computer"><p class="Navtext">COMPUTER</p></a></li>
                 <li ><a href="/laptop"><p class="Navtext">LAPTOPS</p></a></li>
                 <li ><a href="/audio"><p class="Navtext">AUDIO</p></a></li>
-                <li ><a href="/hardwear"><p class="Navtext">hardwear</p></a></li>
+                <li ><a href="/hardwear"><p class="Navtext">HARDWEAR</p></a></li>
             </ul>
         </nav>
         <div id="searchContainer">
@@ -31,7 +32,14 @@
         
 </header>
 <main>
-    <div id="pictures">
+    <select id="filter">
+        <option>FILTER</option>
+        <option>low to high</option>
+        <option>high to low</option>
+        <option>SALE</option>
+    </select>
+    <input id="resetFilter" type="button" value="reset">
+    <div id="products">
     </div>
 </main>
 <footer></footer>

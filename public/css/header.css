@@ -1,14 +1,23 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background: #D3CCE3;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+}
 #nav {
-    display: flex;
+  width: 100%;
+  display: flex;
+  flex-flow: row ;
     background-color:rgb(17, 1, 1);
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     height: 6vh;
-  }
+  }  
   #menuBurger {
-   justify-self: flex-end;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,19 +89,19 @@
   }
   #navUl p{
     font-size: 0%;
-    transition: all 1s ease-in-out;
+    transition: all .5s ease-out;
   }
   #navUl.openMenu{
-    height: 90vh;
-    transition: all 1s ease-in-out;
+    height: 100vh;
+    transition: all .5s ease-in-out;
   }
   .textAppear{
-    font-size: 400% !important;
-    transition: all 1s ease-in-out;
+    font-size: 300% !important;
   
   }
 
   #searchContainer{
+    margin-top: 2vh;
     position: relative;
     }
     #search{
@@ -112,15 +121,9 @@
         color: black;
         font-weight: 700;
         text-decoration: none;
-        /* background-color: white; */
-    }
-    #searchForm li{
-        padding: 2rem;
-        
-        width: 100%;
     }
     #searchForm li:hover{
         width: 100%;
-        background-color:rgba(236, 233, 233, 0.596);
+        background-color:rgba(128, 128, 128, 0.363)
     }
     

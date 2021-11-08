@@ -62,9 +62,33 @@ function addingProduct(req, res) {
 
 
 
-
 // -----------------------------------------
-function fullProdcuctsData(req, res) {
+function fullCategoryData(req, res,filter) {
+  client
+    .then((db) => {
+      const dbo = db.db(dbName);
+      dbo
+        .collection(collection)
+        .find({category:filter})
+        .toArray()
+        .then((data) => {
+          return res.send(data);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).send(`site on construction`);
+    });
+}
+
+
+
+
+
+
+// ------------------------------------------------
+
+function fullProductsData(req, res,filter) {
   client
     .then((db) => {
       const dbo = db.db(dbName);
@@ -81,11 +105,6 @@ function fullProdcuctsData(req, res) {
       return res.status(500).send(`site on construction`);
     });
 }
-
-
-
-
-
 
 // ---------------------------
 function UpdateProduct(req, res) {
@@ -174,8 +193,9 @@ function deleteProduct(req, res) {
 }
 
 module.exports = {
-  fullProdcuctsData,
+  fullCategoryData,
   addingProduct,
   UpdateProduct,
   deleteProduct,
+  fullProductsData
 };

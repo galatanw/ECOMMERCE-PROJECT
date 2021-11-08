@@ -1,0 +1,48 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap');
+
+
+  #products{
+    margin-top: 5vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap:3vh;
+  }
+  .productsPreview{
+  width: 30%;
+  height: 70vh;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  overflow:hidden;
+  cursor: pointer;
+  background-color:white;
+  box-shadow: 10px 10px 0px hsla(240, 72%, 39%, 0.4);;
+  font-family: 'Lora', serif;
+  text-align: center;
+}
+  .images{
+      /* height:0vh; */
+      width: 80%;
+      margin-left: 10%;
+    transition: all .4s ease-in-out;
+  }
+  .images:hover{
+    filter: brightness(1.2);
+  }
+ 
+@media only screen and (max-width:600px) {
+    #products{
+     background-color: black;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        row-gap: 5vh;
+    }
+    .productsPreview{
+        width: 80%;
+    }
+}

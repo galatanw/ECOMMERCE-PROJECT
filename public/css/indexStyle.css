@@ -3,6 +3,8 @@
     padding: 0;
     box-sizing: border-box;
 }
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@500&display=swap');
+
 
 ::-webkit-scrollbar {
     width: 10px;
