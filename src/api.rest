@@ -10,4 +10,4 @@ Content-Type: application/json
 "finalPrice":3600
 }
 ###
-DELETE  http://localhost:2000/carts/61896040a4e1bc8796a85a26
+PATCH   http://localhost:2000/carts/61896040a4e1bc8796a85a26

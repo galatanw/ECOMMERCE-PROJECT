@@ -17,7 +17,7 @@ function patch(data) {
 axios
 .patch("/carts",data)
 .then((data)=>{
-    console.log(1,data);
+alert("added")
 })
 .catch((err)=>{
     console.log(err);

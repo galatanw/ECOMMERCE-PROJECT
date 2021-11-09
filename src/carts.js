@@ -1,5 +1,3 @@
-const { ObjectID } = require("bson");
-
 require("dotenv").config();
 const mongo = require("mongodb"),
   url = process.env.MONGO_DEV_URL,
@@ -27,6 +25,7 @@ function fullData(req, res) {
 }
 
 function insertOneProduct(req, res) {
+  console.log("here");
   const body = req.body;
   body.qnt = Number(body.qnt);
   client
@@ -34,7 +33,7 @@ function insertOneProduct(req, res) {
       const dbo = db.db(dbName);
       dbo
         .collection("carts")
-        .findOneAndUpdate({}, { $push: { products: body } })
+        .findOneAndUpdate({user_id: 123},{ $push: { products: body } },{upsert:true})
         .then((data) => {
           return res.send(data);
         });
@@ -45,43 +44,59 @@ function insertOneProduct(req, res) {
     });
 }
 
-function cartProductQnt(req, res) {
-  const body = req.body;
-  const qnt = body.qnt;
-  const ID = params.id;
+function deleteOneProduct(req, res) {
+  const ID = req.params.id;
+  const pull = { $pull: { products: { _id: ID } } };
+  const myCart = { _id: ObjectId("618a6c6ee07aebb574e1d29b") };
   client
     .then((db) => {
       const dbo = db.db(dbName);
       dbo
         .collection("carts")
-        .findOneAndUpdate(
-          { "products._id": { _id: ObjectID(ID) } },
-          { $set: { qnt: qnt } }
-        )
-        .then((data) => {
-          return res.send(data);
+        .findOneAndUpdate(myCart, pull)
+        .then((response) => {
+          if ((response.value == null) | (response.value == undefined)) {
+            console.log(response);
+            res.status(404).send(response);
+            return;
+          }
+          res.send(response);
         });
     })
     .catch((err) => {
       console.log(err);
-      return res.status(500).send(`site on construction`);
+      res.status(400).send(err);
     });
 }
-function deleteOneProduct(req, res) {
+function changeQnt(req, res) {
+  const QNT = req.body.qnt;
   const ID = req.params.id;
-  client.then((db) => {
-    const dbo = db.db(dbName);
-    dbo
-      .collection("carts")
-      .findOneAndUpdate({products: { id: ObjectID(ID)}}, { $pull: { products: { id: ObjectID(ID) } } })
-      .then((result) => {
-        res.send(result);
-      });
-  });
+  const updatedQnt = {$set: { "products.$.qnt": QNT}};
+  const myCart = {user_id: 123, "products._id": ID};
+  client
+    .then((db) => {
+      const dbo = db.db(dbName);
+      dbo
+        .collection("carts")
+        .updateOne(myCart, updatedQnt)
+        .then((response) => {
+          if ( response.matchedCount!= 1) {
+            console.log(response);
+            res.status(404).send(response);
+            return;
+          }
+          res.send(response);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send(err);
+    });
 }
+
 module.exports = {
   fullData,
   insertOneProduct,
   deleteOneProduct,
-  cartProductQnt,
+  changeQnt,
 };

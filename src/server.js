@@ -24,8 +24,11 @@ carts.fullData(req,res)
 app.patch("/carts",(req,res)=>{
   carts.insertOneProduct(req,res)
 })
-app.delete("/carts/:id",(req,res)=>{
+app.patch("/carts/delete/:id",(req,res)=>{
   carts.deleteOneProduct(req,res)
+})
+app.patch("/carts/changeQnt/:id",(req,res)=>{
+  carts.changeQnt(req,res)
 })
 
 app.get('/products',(req,res)=>{
