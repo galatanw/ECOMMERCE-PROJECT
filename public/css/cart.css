@@ -1,0 +1,32 @@
+main{
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#cartTable th,#cartTable td{
+    border: 1px solid rgb(151, 151, 151);
+}
+#cartContainer{
+    box-shadow: 0 0 0 100vmax rgba(0,0,0,.3);
+    /* background-color: royalblue; */
+}
+#cartTable{
+    width: 100%;
+    overflow-y: scroll;
+}
+.terraContainer{
+    width: 100%;
+    /* background-color: red; */
+}
+#cartContainer img{
+    width:50%;
+}
+#finalCartTh , .finalCart{
+    color: white;
+    background-color: hsl(180, 25%, 25%,.8);
+    width: 100%;
+}
+#finalCartTh  , #finalCartTh td ,#finalCartTh th{
+    border: 1px  solid black;
+}

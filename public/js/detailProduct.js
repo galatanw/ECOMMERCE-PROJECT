@@ -15,7 +15,7 @@ axios
 }
 function patch(data) {    
 axios
-.patch("/carts",{data})
+.patch("/carts",data)
 .then((data)=>{
     console.log(1,data);
 })

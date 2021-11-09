@@ -12,7 +12,7 @@ search.addEventListener("keyup",()=>{
         searchForm.innerHTML=""
     for (const iterator of res.data) {
         if(iterator.description.match(value)){
-            searchForm.innerHTML+=`<a href="/singleProudct/${iterator._id}" style="background-color: brown; width:100px;"><li>${iterator.description}</li></a><hr>`
+            searchForm.innerHTML+=`<a href="/singleProudctHbs/${iterator._id}" style="background-color: brown; width:100px;"><li>${iterator.description}</li></a><hr>`
         }
     }
     })
@@ -38,7 +38,6 @@ navMenuBtn.addEventListener("click", () => {
   navMenuTxt[1].classList.remove("textAppear");
   navMenuTxt[2].classList.remove("textAppear");
   navMenuTxt[3].classList.remove("textAppear");
-
   openMenu = false;
 });
 function closeCart(){

@@ -96,7 +96,7 @@ background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, F
     transition: all .5s ease-in-out;
   }
   .textAppear{
-    font-size: 300% !important;
+    font-size: 200% !important;
   
   }
 

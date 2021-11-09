@@ -15,15 +15,17 @@ app.set("views",viewsPath)
 hbs.registerPartials(PartialsPath)
 app.use(express.static(publicPath));
 app.use(express.json())
-
+app.patch("/carts/cart/:id",(req,res)=>{
+  carts.insertOneProduct(req,res)
+})
 app.get("/carts",(req,res)=>{
 carts.fullData(req,res)
 })
 app.patch("/carts",(req,res)=>{
   carts.insertOneProduct(req,res)
 })
-app.delete("/cart",(req,res)=>{
-  
+app.delete("/carts/:id",(req,res)=>{
+  carts.deleteOneProduct(req,res)
 })
 
 app.get('/products',(req,res)=>{
