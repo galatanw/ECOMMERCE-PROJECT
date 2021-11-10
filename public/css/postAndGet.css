@@ -1,0 +1,43 @@
+#postProduct{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 2vh;
+}
+.insertInput {
+  height: 3vh;
+  border: none;
+  background: transparent;
+  border-bottom: 2px dotted rgb(187, 187, 63);
+}
+#contacts {
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2vh;
+}
+.message {
+  width: 60%; 
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);
+  border-radius: 5%;
+  box-shadow: 2vh 2vh 2vh white; 
+}
+.message p {
+  width: 50%;
+}
+@media only screen and (max-width:750px) {
+  body{
+    background: black;
+  }
+  #contacts{
+    flex-direction: column;
+    overflow-x: auto;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+}

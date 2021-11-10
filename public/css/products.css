@@ -34,6 +34,10 @@ main{
   .images:hover{
     filter: brightness(1.2);
   }
+/* .productsPreview input{
+  width: 50%;
+  margin-left: 25%;
+} */
  
 @media only screen and (max-width:600px) {
     #products{

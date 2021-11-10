@@ -8,6 +8,7 @@ const publicPath = path.join(__dirname, "..", "public");
 const viewsPath = path.join(__dirname, "..", "templates","views");
 const PartialsPath = path.join(__dirname, "..", "templates","partials");
 const carts=require("./carts");
+const contacts=require("./contacts");
 const products=require("./products");
 
 app.set("view engine","hbs")
@@ -18,8 +19,23 @@ app.use(express.json())
 app.patch("/carts/cart/:id",(req,res)=>{
   carts.insertOneProduct(req,res)
 })
+app.delete("/carts/:id",(req,res)=>{
+products.deleteProduct(req,res)
+})
+app.get("/singleCart",(req,res)=>{
+carts.getSingleProduct(req,res)
+})
+app.get("/getContacts",(req,res)=>{
+  contacts.fullData(req,res)
+})
+  app.post("/contacts",(req,res)=>{
+  contacts.insertMessage(req,res)
+})
 app.get("/carts",(req,res)=>{
 carts.fullData(req,res)
+})
+app.post("/addProduct",(req,res)=>{
+  products.addingProduct(req,res)
 })
 app.patch("/carts",(req,res)=>{
   carts.insertOneProduct(req,res)

@@ -24,6 +24,15 @@ function addingProduct(req, res) {
       if (element[0] == "" || element == null || element == undefined) {
         return res.status(400).send(`${key} is unqualified`);
       }
+      
+    }
+    if(key=="category"){
+      switch(key){
+        case "laptop":
+          break
+          default:
+        return res.status(400).send(`${key} is unqualified`);
+      }
     }
   }
   if (!Number(body.sale) && !Number(body.price)) {
@@ -116,7 +125,17 @@ function UpdateProduct(req,res){
       if (element[0] == "" || element == null || element == undefined) {
         return res.status(400).send(`${key} is unqualified`);
       }
+    
     }
+    if(key=="category"){
+      switch(key){
+        case "laptop":
+          break
+          default:
+        return res.status(400).send(`${key} is unqualified`);
+      }
+    }
+
   }
   if (!Number(body.sale) && !Number(body.price)) {
     return res.status(400).send("PRICE AND SALE MUST BE NUMERIC");

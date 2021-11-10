@@ -22,6 +22,7 @@ function getCategory() {
           <h3>final Price:${
             iterator.price - (iterator.price * iterator.sale) / 100
           } $</h3>
+          <a href="#"><input onclick="deleteProduct('${iterator._id}')" style="color:red" type="button" value="delete"></a>
           <a href="/singleProudctHbs/${iterator._id}"><input type="button" value="Details"></a>
           <a href="/singleProductUpdate/${iterator._id}"><input type="button" value="update"></a>
            </div>
@@ -29,6 +30,23 @@ function getCategory() {
       i++;
     }
   });
+}
+function deleteProduct(id){
+  const verify=prompt(id)
+  if(verify==id){
+  axios
+  .delete(`/products/${id}`)
+  .then((res) => {
+    alert("delted");
+    getCategory()
+})
+.catch((err)=>{
+  console.log(err);
+})
+return  
+}
+alert("verification failed")
+
 }
 getCategory(category);
 const pics = document.getElementsByClassName("images");
@@ -86,8 +104,11 @@ function sortBySelect(kind) {
           <h3>final Price:${
             iterator.price - (iterator.price * iterator.sale) / 100
           } $</h3>
+          <a href="/singleProudctHbs/${iterator._id}"><input type="button" value="Details"></a>
+          <a href="/singleProductUpdate/${iterator._id}"><input type="button" value="update"></a>
+          <a href="#"><input onclick="deleteProduct('${iterator._id}')"  type="button" value="delete"></a>
            </div>
-              `;
+          `;
           i++;
         }
       });
@@ -114,8 +135,11 @@ function sortBySelect(kind) {
           <h3>final Price:${
             iterator.price - (iterator.price * iterator.sale) / 100
           } $</h3>
+          <a href="/singleProudctHbs/${iterator._id}"><input type="button" value="Details"></a>
+          <a href="/singleProductUpdate/${iterator._id}"><input type="button" value="update"></a>
+          <a href="#"><input onclick="deleteProduct('${iterator._id}')" style="color:red" type="button" value="delete"></a>
            </div>
-            `;
+          `;
           i++;
         }
       });
@@ -138,6 +162,9 @@ function sortBySelect(kind) {
             <h3>final Price:${
               iterator.price - (iterator.price * iterator.sale) / 100
             } $</h3>
+            <a href="/singleProudctHbs/${iterator._id}"><input type="button" value="Details"></a>
+            <a href="/singleProductUpdate/${iterator._id}"><input type="button" value="update"></a>
+            <a href="#"><input onclick="deleteProduct('${iterator._id}')" style="color:red" type="button" value="delete"></a>
             <h2><span style="color:red">SALE:</sapn><span style="color:gold">${iterator.sale}%</span></h2>
              </div>
               `;
@@ -154,4 +181,5 @@ document.getElementById("resetFilter").onclick=()=>{
   div.innerHTML = "";
   i = 0;
   getCategory(category)
+  
 }

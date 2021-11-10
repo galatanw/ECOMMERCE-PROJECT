@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/postAndGet.css">
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+    <header>
+        <div id="nav">
+            <h1 id="myName" style="color: white;">GAL ATNAW</h1>
+            <div id="menuBurger">
+                <div class="menuBurgerBtn"></div>
+            </div>
+            </div>
+            <nav>
+                <ul id="navUl">
+                    <li ><a href="/computer"><p class="Navtext">COMPUTER</p></a></li>
+                    <li ><a href="/hardwear"><p class="Navtext">HARDWEAR</p></a></li>
+                    <li ><a href="/audio"><p class="Navtext">AUDIO</p></a></li>
+                    <li ><a href="./cart.html"><p class="Navtext">CART</p></a></li>
+                </ul>
+            </nav>
+            <div id="searchContainer">
+                <input id="search" type="search" placeholder="search">
+                <ul id="searchForm">
+                </ul>
+            </div>
+            
+    </header>
+<main>
+   <form id="postProduct">   
+    <label for="user" class="label">description</label>
+    <input name="description" placeholder="description" type="text" class="styledFields insertInput">
+    <label for="pass" class="label">price</label>
+    <input name="price" placeholder="price" type="number" class="styledFields insertInput">
+    <label for="pass" class="label">sale</label>
+    <input name="sale" type="number" class="styledFields insertInput" >
+    <label for="pass" class="label">category</label>
+    <select class="styledFields insertInput">
+        <option >category</option>
+        <option>laptop</option>
+        <option>computer</option>
+        <option>hardwear</option>
+        <option>audio</option>
+    </select>
+    <label for="pass" class="label">brand</label>
+    <input name="brand" type="text" placeholder="brand" class="styledFields insertInput">
+    <label for="pass" class="label">weight</label>
+    <input name="weight" type="text" placeholder="weight" class="styledFields insertInput">
+    <label for="pass" class="label">insurance</label>
+    <input name="insurance" type="text" placeholder="insurance" class="styledFields insertInput">
+    <label for="pass" class="label">color</label>
+    <input name="color" type="text" placeholder="color" class="styledFields insertInput">
+    <label for="pass" class="label">one</label>
+    <input name="one" type="text" placeholder="one" class="styledFields insertInput">
+    <label for="pass" class="label">two</label>
+    <input name="two" type="text" placeholder="two" class="styledFields insertInput">
+    <label for="pass" class="label">qnt</label>
+    <input name="qnt" type="number" placeholder="qnt" class="styledFields insertInput">
+    <label for="pass" class="label">image1</label>
+    <input name="image" type="text" placeholder="image" class="styledFields insertInput">
+    <label for="pass" class="label">image2</label>
+    <input name="image" type="text" placeholder="image" class="styledFields insertInput">
+    <label for="pass" class="label">image3</label>
+    <input name="image" type="text" placeholder="image" class="styledFields insertInput">
+    <label for="pass" class="label">image4</label>
+    <input name="image" type="text" placeholder="image" class="styledFields insertInput">
+    <input type="submit" value="CREATE">
+</form>
+<div id="contacts">
+    <h1>contacts</h1>
+</main>
+    <footer>
+        <form id="contactForm">
+            <input id="contactName" name="name" placeholder="What is your name?" class="name" required />
+            <input id="contactEmail" name="emailaddress" placeholder="What is your email?" class="email" type="email" required />
+        <textarea id="contactMessage" rows="4" cols="50" name="subject" placeholder="Please enter your message" class="message" required></textarea>
+        <input name="submit" id ="contacSubmit" type="submit">
+    </form>
+    </footer>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="./js/postAndGet.js"></script>    
+<script src="./js/headerFooter.js"></script>    
+</body>
+</html>

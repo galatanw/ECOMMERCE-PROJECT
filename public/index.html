@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title  id="titleName">laptop</title>
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/products.css">
 </head>
 <body>
@@ -20,7 +21,6 @@
             <ul id="navUl">
                 <li ><a href="/computer"><p class="Navtext">COMPUTER</p></a></li>
                 <li ><a href="/hardwear"><p class="Navtext">HARDWEAR</p></a></li>
-                <!-- <li ><a href="/laptop"><p class="Navtext">LAPTOPS</p></a></li> -->
                 <li ><a href="/audio"><p class="Navtext">AUDIO</p></a></li>
                 <li ><a href="./cart.html"><p class="Navtext">CART</p></a></li>
             </ul>
@@ -43,9 +43,16 @@
     <div id="products">
     </div>
 </main>
-<footer></footer>
+<footer>
+    <form id="contactForm">
+		<input id="contactName" name="name" placeholder="What is your name?" class="name" required />
+		<input id="contactEmail" name="emailaddress" placeholder="What is your email?" class="email" type="email" required />
+    <textarea id="contactMessage" rows="4" cols="50" name="subject" placeholder="Please enter your message" class="message" required></textarea>
+    <input name="submit" id ="contacSubmit" type="submit">
+</form>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="js/main.js"></script>  
-<script src="./js/search.js"></script>
+<script src="./js/headerFooter.js"></script>
 </body>
 </html>

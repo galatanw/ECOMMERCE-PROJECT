@@ -11,3 +11,5 @@ Content-Type: application/json
 }
 ###
 PATCH   http://localhost:2000/carts/61896040a4e1bc8796a85a26
+###
+GET  http://localhost:2000/singleProduct/61896040a4e1bc8796a85a26

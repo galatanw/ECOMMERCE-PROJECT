@@ -1,8 +1,12 @@
+const sumCart = document.getElementsByClassName("finalCart");
 const cartTable = document.getElementById("cartTable");
-let sum = 0;
 const priceDisplay = document.getElementById("sum");
 const cartRow = document.getElementsByClassName("cartRow");
+let sum;
+let quant;
+let sale;
 function buildCart(params) {
+  let sum = 0;
   cartTable.innerHTML = `
 <tr class="terraContainer">
 <th>item</th>
@@ -10,10 +14,12 @@ function buildCart(params) {
 <th>final price</th>
 </tr> `;
   axios
-    .get("/carts")
+    .get("/singleCart")
     .then((data) => {
-      console.log(data.data);
-      const products = data.data[0].products;
+      const products = data.data.products;
+      sumCart[0].innerHTML = `<h6>${data.data.sum - data.data.sale}</h6>`
+      sumCart[1].innerHTML = `<h6>${data.data.shipping}</h6>`
+      sumCart[2].innerHTML = `<h6>${data.data.sum}</h6>`
       for (let index = 0; index < products.length; index++) {
         const element = products[index];
         if (element) sum += Number(element.price);
@@ -26,17 +32,12 @@ function buildCart(params) {
     <td><h1 class=priceTerra style:color:"red">${
       element.price * element.qnt
     } USD</h1>
-    <td style="border: none; "><button onClick=qnt('${element._id},${
-          element.qnt
-        },+')>
-    <h1>+</h1></button><button onClick=qnt('${element._id},${
-          element.qnt
-        },-') style="margin-left:5px"><h1>-</h1></button>
+    <td style="border: none; "><button onClick="minus('${element._id}')">
+    <h1>+</h1></button><button onClick="plus('${element._id}')" style="margin-left:5px"><h1>-</h1></button>
     </td >
     `;
       }
     })
-
     .catch((err) => {
       console.log(err);
       cartTable.innerHTML += `
@@ -46,35 +47,50 @@ function buildCart(params) {
 }
 buildCart();
 
-function qnt(filterAndValue) {
-  const seperator = filterAndValue.indexOf(",");
-  const secondSeperator = filterAndValue.lastIndexOf(",");
-  const id = filterAndValue.substring(0, seperator);
-  let qnt = Number(filterAndValue.substring(seperator + 1, secondSeperator));
-  const operator = filterAndValue.substring(secondSeperator + 1);
-  switch (operator) {
-    case "+":
-      qnt += 1;
-      break;
-    case "-":
-      qnt -= 1;
-      break;
-    default:
-      return;
-  }
-  if (qnt == 0 && operator == "-") {
-    axios
-      .patch(`/carts/delete/${id}`, { qnt })
-      .then((data) => {
-        buildCart();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    return;
-  }
+function minus(ID) {
   axios
-    .patch(`/carts/changeQnt/${id}`, { qnt })
+    .get("/singleCart")
+    .then((data) => {
+      for (const iterator of data.data.products) {
+        if ((iterator._id = ID)) {
+          quant = 1 + Number(iterator.qnt);
+          sum = Number(data.data.sum) - Number(iterator.price);
+          sale =
+            Number(data.data.sale) -
+            Number(iterator.price - (iterator.sale / 100 * iterator.price));
+          changeQuantity(ID);
+          return;
+        }
+      }
+    })
+    .catch((err) => {
+      alert("error accured");
+    });
+}
+
+function plus(ID) {
+  axios
+    .get("/singleCart")
+    .then((data) => {
+      for (const iterator of data.data.products) {
+        if ((iterator._id = ID)) {
+          quant = 1 + Number(iterator.qnt);
+          sum = Number(data.data.sum) + Number(iterator.price);
+          sale =
+            Number(data.data.sale) +
+            Number(iterator.price - (iterator.sale / 100 * iterator.price));
+          changeQuantity(ID);
+          return;
+        }
+      }
+    })
+    .catch((err) => {
+      alert("error accured");
+    });
+}
+function changeQuantity(ID) {
+  axios
+    .patch(`/carts/changeQnt/${ID}`, { qnt: quant, sale: sale, sum: sum })
     .then((data) => {
       buildCart();
     })

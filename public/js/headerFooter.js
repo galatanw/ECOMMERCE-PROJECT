@@ -44,3 +44,21 @@ function closeCart(){
   search.value=""
   searchForm.innerHTML=""
 }
+
+const contactForm =document.getElementById("contactForm")
+const contactName =document.getElementById("contactName")
+const contactEmail =document.getElementById("contactEmail")
+const contactMessage =document.getElementById("contactMessage")
+  
+contactForm.addEventListener("submit",(e)=>{
+  e.preventDefault()
+  axios
+  .post("/contacts",{email:contactEmail.value,name:contactName.value,message:contactMessage.value})
+  .then((data)=>{
+    console.log(data);
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+  .then()
+})

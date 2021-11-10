@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
     {{#if product}}
     <link rel="stylesheet" href="../css/singleProduct.css">
     {{/if}}
@@ -42,13 +43,21 @@
 {{#if update}}
   {{>update}}
 {{/if}}
+<footer>
+    <form id="contactForm">
+		<input id="contactName" name="name" placeholder="What is your name?" class="name" required />
+		<input id="contactEmail" name="emailaddress" placeholder="What is your email?" class="email" type="email" required />
+    <textarea id="contactMessage" rows="4" cols="50" name="subject" placeholder="Please enter your message" class="message" required></textarea>
+    <input name="submit" id ="contacSubmit" type="submit">
+</form>
+
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="../js/headerFooter.js"></script>
 {{#if product}}
       <script src="../js/detailProduct.js"></script>
 {{/if}}
 {{#if update}}
       <script src="../js/updateProduct.js"></script>
 {{/if}}
-      <script src="../js/search.js"></script>
 </body>
 </html>

@@ -20,27 +20,46 @@ function fullData(req, res) {
     })
     .catch((err) => {
       console.log(err);
-      return res.status(500).send(`site on construction`);
+      return res.status(400).send(`CART'S PRODUCT ISSUE`);
     });
+}
+function getSingleProduct(req,res) {
+  client
+  .then((db) => {
+    const dbo = db.db(dbName);
+    dbo
+      .collection("carts")
+      .findOne({_id:ObjectId("618a6c6ee07aebb574e1d29b")})
+      .then((data) => {
+        return res.send(data);
+      });
+  })
+  .catch((err) => {
+    console.log(err);
+    return res.status(400).send(`CART'S PRODUCT ISSUE`);
+  });
 }
 
 function insertOneProduct(req, res) {
   console.log("here");
   const body = req.body;
+  const price=body.price;
+  const sale=body.sale
+  console.log(body);
   body.qnt = Number(body.qnt);
   client
     .then((db) => {
       const dbo = db.db(dbName);
       dbo
         .collection("carts")
-        .findOneAndUpdate({user_id: 123},{ $push: { products: body } },{upsert:true})
+        .findOneAndUpdate({_id:ObjectId("618a6c6ee07aebb574e1d29b")},{ $push: { products: body },$inc:{sum:price , sale:(price-(sale/100*price))}})
         .then((data) => {
           return res.send(data);
         });
     })
     .catch((err) => {
       console.log(err);
-      return res.status(500).send(`site on construction`);
+      return res.status(400).send(`CART'S PRODUCT ISSUE`);
     });
 }
 
@@ -69,10 +88,20 @@ function deleteOneProduct(req, res) {
     });
 }
 function changeQnt(req, res) {
+  console.log(1)
   const QNT = req.body.qnt;
+  const SALE = req.body.sale;
+  const SUM = req.body.sum;
   const ID = req.params.id;
-  const updatedQnt = {$set: { "products.$.qnt": QNT}};
-  const myCart = {user_id: 123, "products._id": ID};
+
+    let updatedQnt
+  if(SUM>=20000){
+    updatedQnt =  {$set: { "products.$.qnt": QNT,sale:SALE,sum:SUM,shipping:0}}
+  }
+  else{
+    updatedQnt = {$set: { "products.$.qnt": QNT,sale:SALE,sum:SUM,shipping:25 }}
+  }
+  const myCart = {_id:ObjectId("618a6c6ee07aebb574e1d29b"), "products._id": ID};
   client
     .then((db) => {
       const dbo = db.db(dbName);
@@ -80,7 +109,7 @@ function changeQnt(req, res) {
         .collection("carts")
         .updateOne(myCart, updatedQnt)
         .then((response) => {
-          if ( response.matchedCount!= 1) {
+          if (response.matchedCount!= 1) {
             console.log(response);
             res.status(404).send(response);
             return;
@@ -94,9 +123,15 @@ function changeQnt(req, res) {
     });
 }
 
+// function sum(req,res) {
+//   client
+//   .then( )
+// }
+
 module.exports = {
   fullData,
   insertOneProduct,
   deleteOneProduct,
   changeQnt,
+  getSingleProduct
 };
