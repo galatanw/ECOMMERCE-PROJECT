@@ -7,8 +7,9 @@ const mongo = require("mongodb"),
 
 // -------------------
 function addingProduct(req, res) {
-  let body = req.body;
-  console.log(body);
+  let body ={price:4000,sale:10,brand:"APPLE",description:"Apple MacBook Pro 13 - 2020 '13.3'",qnt:2000, images:["https://i.ibb.co/sjnNn01/main.jpg","https://i.ibb.co/NYP6Kbr/second.jpg","https://i.ibb.co/Zz9M7Bc/third.jpg","https://i.ibb.co/whhtHt6/four.png"]  ,color:"SPACE GRAY",WEIGHT:"1.4Kg",one:"58.2Wh lithium-polymer battery",two:"Apple M1 chip 8-core CPU",INSURANCE:"1 Year by the Official importer" ,category:"laptop"}
+    // if(Object.keys(body).length==)
+
   for (const key in body) {
     const element = body[key];
     if (key == "images") {
@@ -21,17 +22,17 @@ function addingProduct(req, res) {
         return res.status(400).send(`src can not contain spaces`);
       }
     } else {
-      if (element[0] == "" || element == null || element == undefined) {
+      if (element[0] == "" || element == null || element == undefined||element[0]==" ") {
         return res.status(400).send(`${key} is unqualified`);
       }
-      
     }
-    if(key=="category"){
-      switch(key){
+    if (key == "category") {
+      console.log(key);
+      switch (element) {
         case "laptop":
-          break
-          default:
-        return res.status(400).send(`${key} is unqualified`);
+          break;
+        default:
+          return res.status(400).send(`${key} is unqualified`);
       }
     }
   }
@@ -55,7 +56,7 @@ function addingProduct(req, res) {
           sale: body.sale,
           category: body.category,
           one: body.one,
-          two: body.two
+          two: body.two,
         })
         .then((data) => {
           return res.send(data);
@@ -75,7 +76,7 @@ function fullCategoryData(req, res, filter) {
       const dbo = db.db(dbName);
       dbo
         .collection(collection)
-        .find({category: filter})
+        .find({ category: filter })
         .toArray()
         .then((data) => {
           return res.send(data);
@@ -108,8 +109,8 @@ function fullProductsData(req, res) {
 }
 
 // ---------------------------
-function UpdateProduct(req,res){
-  let body=req.body;
+function UpdateProduct(req, res) {
+  let body = req.body;
   for (const key in body) {
     const element = body[key];
     if (key == "images") {
@@ -125,17 +126,15 @@ function UpdateProduct(req,res){
       if (element[0] == "" || element == null || element == undefined) {
         return res.status(400).send(`${key} is unqualified`);
       }
-    
     }
-    if(key=="category"){
-      switch(key){
+    if (key == "category") {
+      switch (key) {
         case "laptop":
-          break
-          default:
-        return res.status(400).send(`${key} is unqualified`);
+          break;
+        default:
+          return res.status(400).send(`${key} is unqualified`);
       }
     }
-
   }
   if (!Number(body.sale) && !Number(body.price)) {
     return res.status(400).send("PRICE AND SALE MUST BE NUMERIC");
@@ -200,10 +199,7 @@ function deleteProduct(req, res) {
     });
 }
 
-
-
 // ----------------------------------------
-
 
 function SingleproductHbs(req, res) {
   const ID = req.params.id;
@@ -226,7 +222,7 @@ function SingleproductHbs(req, res) {
             thirdImage: data.images[2],
             fourImage: data.images[3],
             product: true,
-            ID:ID,
+            ID: ID,
             logo: "https://i.ibb.co/JqRWZS8/77fb4fdce8db4ce58087c6792dd09418.png",
           });
         });
@@ -237,13 +233,7 @@ function SingleproductHbs(req, res) {
     });
 }
 
-
-
-
-
-
 // ------------------------------------------
-
 
 function updateSingleProduct(req, res) {
   const ID = req.params.id;
@@ -269,10 +259,10 @@ function updateSingleProduct(req, res) {
             Image: data.images[0],
             update: true,
             ID: ID,
-            image1:data.images[0],
-            image2:data.images[1],
-            image3:data.images[2],
-            image4:data.images[3]
+            image1: data.images[0],
+            image2: data.images[1],
+            image3: data.images[2],
+            image4: data.images[3],
           });
         });
     })
@@ -282,26 +272,23 @@ function updateSingleProduct(req, res) {
     });
 }
 
-
 // ----------------------------------------------------
 function Singleproduct(req, res) {
   const ID = req.params.id;
-  client
-    .then((db) => {
-      const dbo = db.db(dbName);
-      dbo
-        .collection(collection)
-        .findOne({ _id: ObjectId(ID) })
-        .then((data) => {
-          res.send(data)
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.status(404).send(`this ID does not match with any product`);
-    });
-})
+  client.then((db) => {
+    const dbo = db.db(dbName);
+    dbo
+      .collection(collection)
+      .findOne({ _id: ObjectId(ID) })
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(404).send(`this ID does not match with any product`);
+      });
+  });
 }
-
 
 module.exports = {
   fullCategoryData,

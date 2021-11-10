@@ -12,7 +12,7 @@ function bought(ID) {
             if(iterator._id=ID){
                 quant=Number(amount.value)+Number(iterator.qnt)
                 sum=Number(iterator.price)*Number(amount.value)+Number(data.data.sum)
-                sale=Number(data.data.sale)+Number(iterator.price-(iterator.sale/100*iterator.price))
+                sale=Number(data.data.sale)+Number((iterator.sale/100*iterator.price))
                changeQuantity(ID)
             return
             }

@@ -19,8 +19,8 @@ app.use(express.json())
 app.patch("/carts/cart/:id",(req,res)=>{
   carts.insertOneProduct(req,res)
 })
-app.delete("/carts/:id",(req,res)=>{
-products.deleteProduct(req,res)
+app.patch("/carts/deleteOneProduct/:id",(req,res)=>{
+carts.deleteOneProduct(req,res)
 })
 app.get("/singleCart",(req,res)=>{
 carts.getSingleProduct(req,res)

@@ -14,8 +14,9 @@
 #contacts {
   margin-top: 10vh;
   display: flex;
+  height: 60vh;
+  overflow-y:scroll ;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   row-gap: 2vh;
 }

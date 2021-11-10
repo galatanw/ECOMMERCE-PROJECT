@@ -52,7 +52,7 @@ function insertOneProduct(req, res) {
       const dbo = db.db(dbName);
       dbo
         .collection("carts")
-        .findOneAndUpdate({_id:ObjectId("618a6c6ee07aebb574e1d29b")},{ $push: { products: body },$inc:{sum:price , sale:(price-(sale/100*price))}})
+        .findOneAndUpdate({_id:ObjectId("618a6c6ee07aebb574e1d29b")},{ $push: { products: body },$inc:{sum:price , sale:((sale/100*price))}})
         .then((data) => {
           return res.send(data);
         });
@@ -65,7 +65,9 @@ function insertOneProduct(req, res) {
 
 function deleteOneProduct(req, res) {
   const ID = req.params.id;
-  const pull = { $pull: { products: { _id: ID } } };
+  const SALE = req.body.sale;
+  const PRICE = req.body.price;
+  const pull = { $pull: { products: { _id: ID } },$inc:{sale:-(SALE/100*PRICE),sum:-PRICE}};
   const myCart = { _id: ObjectId("618a6c6ee07aebb574e1d29b") };
   client
     .then((db) => {
@@ -88,7 +90,6 @@ function deleteOneProduct(req, res) {
     });
 }
 function changeQnt(req, res) {
-  console.log(1)
   const QNT = req.body.qnt;
   const SALE = req.body.sale;
   const SUM = req.body.sum;

@@ -1,6 +1,7 @@
 
 main{
 	margin-top: 5vh;
+	height: 140vh;
 }
 main,:after,:before{box-sizing:border-box}
 .clearfix:after,.clearfix:before{content:'';display:table}
@@ -10,17 +11,17 @@ a{color:inherit;text-decoration:none}
 .login-wrap{
 	width:100%;
 	margin:auto;
-	max-width:525px;
-	min-height:670px;
+	max-width:70vw;
+	min-height:70vh;
 	position:relative;
 	background:url(https://i.ibb.co/w4jp8v1/second.jpg) no-repeat center;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
 .login-html{
 	width:100%;
-	height:220vh;
+	height:130vh;
 	position:absolute;
-	padding:90px 70px 50px 70px;
+	padding:6vh 3vh 4vh 5vh;
 	background:rgba(40,57,101,.9);
 }
 .login-html .sign-in-htm,
@@ -45,8 +46,8 @@ a{color:inherit;text-decoration:none}
 	text-transform:uppercase;
 }
 .login-html .tab{
-	font-size:22px;
-	margin-right:15px;
+	font-size:2rem;
+	margin-right:1vw;
 	padding-bottom:5px;
 	margin:0 15px 10px 0;
 	display:inline-block;
@@ -64,7 +65,7 @@ a{color:inherit;text-decoration:none}
 	transform-style:preserve-3d;
 }
 .login-form .group{
-	margin-bottom:15px;
+	margin-bottom:1vh;
 }
 .login-form .group .label,
 .login-form .group .styledFields,
@@ -76,8 +77,8 @@ a{color:inherit;text-decoration:none}
 .login-form .group .styledFields,
 .login-form .group .button{
 	border:none;
-	padding:15px 20px;
-	border-radius:25px;
+	padding:1vh 2vh;
+	border-radius:2vh;
 	background:rgba(255,255,255,.1);
 }
 .login-form .group .label{
@@ -141,4 +142,12 @@ a{color:inherit;text-decoration:none}
 }
 .foot-lnk{
 	text-align:center;
+}
+@media only screen and (max-width:724px){
+	main{
+		height: 120vh;
+	}
+	.login-html{
+		height: 110vh;
+	}
 }
