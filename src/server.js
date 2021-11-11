@@ -21,9 +21,9 @@ app.use(express.json());
   // PRODUCT
 // GET all the products in products collection
 
-// app.get("/products", (req, res) => {
-//   products.fullProductsData(req, res);
-// });
+app.get("/products", (req, res) => {
+  products.fullProductsData(req, res);
+});
 
 // POST one product to products collection
 app.post("/addProduct", (req, res) => {
