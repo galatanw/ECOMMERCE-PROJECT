@@ -4,10 +4,8 @@
 // there is an I var for the hover function the usage of a for of loop is from convinience purposes only  
 //! THE FINAL PRICE IS A COMPONANT OF THE SUM OF ALL PROUCT PRICE MINUS THE SUM OF ALL THE PRODUCTS'S SALES
 function getCategory() {
-  console.log(1);
   axios.get(`/products/${category}`).then((res) => {
     for (const iterator of res.data) {
-      console.log(1, iterator);
       productsImages.push([iterator.images[0], iterator.images[1]]);
       div.innerHTML += `
             <div id="${iterator.description}" class="productsPreview">
