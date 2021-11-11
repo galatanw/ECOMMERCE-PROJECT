@@ -1,6 +1,6 @@
 require("dotenv").config();
 const mongo = require("mongodb"),
-  url = process.env.MONGO_DEV_URL,
+  url = process.env.MONGO_URL,
   client = mongo.MongoClient.connect(url),
   ObjectId = mongo.ObjectId;
 (dbName = "ecommerce"), (collection = "products");
