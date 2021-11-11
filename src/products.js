@@ -203,7 +203,7 @@ function SingleproductHbs(req, res) {
       const dbo = db.db(dbName);
       dbo
         .collection(collection)
-        .findOne({ _id: ObjectId("618c171c677affe2b08f36c1") })
+        .findOne({ _id: ObjectId(ID) })
         .then((data) => {
           res.render("index", {
             description: data.description,
