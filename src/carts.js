@@ -6,6 +6,7 @@ const mongo = require("mongodb"),
   collection = "carts";
 ObjectId = mongo.ObjectId;
 
+// get carts data
 function fullData(req, res) {
   client
     .then((db) => {
@@ -15,15 +16,20 @@ function fullData(req, res) {
         .find({})
         .toArray()
         .then((data) => {
+          if ((response.value == null) || (response.value == undefined))return res.status(400)
           return res.send(data);
         });
     })
     .catch((err) => {
+      console.log("CART FULL DATA ERROR");
       console.log(err);
-      return res.status(400).send(`CART'S PRODUCT ISSUE`);
+      return res.status(400);
     });
 }
-function getSingleProduct(req,res) {
+// --------------
+// get a single cart from cart 
+// only one cart requird due to lack of tokens knowlege
+function getSingleCart(req,res) {
   client
   .then((db) => {
     const dbo = db.db(dbName);
@@ -31,21 +37,25 @@ function getSingleProduct(req,res) {
       .collection("carts")
       .findOne({_id:ObjectId("618a6c6ee07aebb574e1d29b")})
       .then((data) => {
+        
+        if(data.value=="")return res.sendStatus(404)
         return res.send(data);
       });
   })
   .catch((err) => {
+    console.log("CARRT getSingleCart ERROR");
+
     console.log(err);
-    return res.status(400).send(`CART'S PRODUCT ISSUE`);
+    return res.status(400);
   });
 }
+// ------------------------------------
 
+// POST one product to carts document using pacth when body represent the product
 function insertOneProduct(req, res) {
-  console.log("here");
   const body = req.body;
   const price=body.price;
   const sale=body.sale
-  console.log(body);
   body.qnt = Number(body.qnt);
   client
     .then((db) => {
@@ -54,15 +64,18 @@ function insertOneProduct(req, res) {
         .collection("carts")
         .findOneAndUpdate({_id:ObjectId("618a6c6ee07aebb574e1d29b")},{ $push: { products: body },$inc:{sum:price , sale:((sale/100*price))}})
         .then((data) => {
+          if ((data.value == null) || (data.value == undefined))return res.status(400)
           return res.send(data);
         });
     })
     .catch((err) => {
+      console.log("CARRT insertOneProduct ERROR");
       console.log(err);
       return res.status(400).send(`CART'S PRODUCT ISSUE`);
     });
 }
 
+// deleting a product from carts's document
 function deleteOneProduct(req, res) {
   const ID = req.params.id;
   const SALE = req.body.sale;
@@ -76,11 +89,7 @@ function deleteOneProduct(req, res) {
         .collection("carts")
         .findOneAndUpdate(myCart, pull)
         .then((response) => {
-          if ((response.value == null) | (response.value == undefined)) {
-            console.log(response);
-            res.status(404).send(response);
-            return;
-          }
+          if ((response.value == null) || (response.value == undefined))return res.status(404)
           res.send(response);
         });
     })
@@ -89,13 +98,15 @@ function deleteOneProduct(req, res) {
       res.status(400).send(err);
     });
 }
+// -----------------------------------------------------------------------------
+
+// changing the quntatiy of a product and handeling sum,price and sale using patch
 function changeQnt(req, res) {
   const QNT = req.body.qnt;
   const SALE = req.body.sale;
   const SUM = req.body.sum;
   const ID = req.params.id;
-
-    let updatedQnt
+    let updatedQnt;
   if(SUM>=20000){
     updatedQnt =  {$set: { "products.$.qnt": QNT,sale:SALE,sum:SUM,shipping:0}}
   }
@@ -123,16 +134,11 @@ function changeQnt(req, res) {
       res.status(400).send(err);
     });
 }
-
-// function sum(req,res) {
-//   client
-//   .then( )
-// }
-
+// ------------------------------------------------
 module.exports = {
   fullData,
   insertOneProduct,
   deleteOneProduct,
   changeQnt,
-  getSingleProduct
+  getSingleCart
 };

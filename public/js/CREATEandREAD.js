@@ -1,3 +1,5 @@
+// would get all the documents from the contacs collection and assembale them
+// to a scrollable(if nedded) section of the page
 const contacts = document.getElementById("contacts");
 axios.get("/getContacts").then((contactsData) => {
   for (const iterator of contactsData.data) {
@@ -9,9 +11,15 @@ axios.get("/getContacts").then((contactsData) => {
 </article>`;
   }
 });
+
+// ------------------------------------------------------------------------
+
+
+// when submitted the function would prevent the from to target and by that prevent
+// its default event 
+// then post a document in the products Collection 
 document.getElementById("postProduct").addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log(1);
   const body = document.getElementsByClassName("insertInput");
   axios
     .post(`/addProduct`, {
@@ -36,3 +44,5 @@ document.getElementById("postProduct").addEventListener("submit", (e) => {
     })
     .then();
 });
+
+// ------------------------------------------------------------------------

@@ -1,3 +1,14 @@
+// the page been rendered using hbs 
+// in the backend the server gets the AJAX request after pressing the 
+// details button in the product card
+// the request is kind GET and contains the product's ID as a param
+// then thers a mongoDB find function that get the specific product
+// rendering the all the values of the product 
+// taking the objectID of the product and render it 
+// as an argument to updateProduct function 
+// which then  patch(when the button clicked)
+// and updates the product who carries this id
+
 const body=document.getElementsByClassName('insertInput')
 function updateProduct(ID){
 axios
@@ -21,3 +32,5 @@ axios
 .catch((err)=>{console.log(err);})
 .then()
 }
+
+// -----------------------------------------------------------------------------------------

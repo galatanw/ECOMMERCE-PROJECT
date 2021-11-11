@@ -8,7 +8,7 @@ const mongo = require("mongodb"),
 
 
 
-
+// POST the message that came in the request's body and validate that they are not empty 
 function insertMessage(req, res) {
   const body = req.body;
   console.log(body);
@@ -42,7 +42,7 @@ function insertMessage(req, res) {
 }
 
 
-
+// GET all the documents in the cotntacts collection 
 function fullData(req, res) {
   client
     .then((db) => {

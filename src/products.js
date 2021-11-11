@@ -5,11 +5,8 @@ const mongo = require("mongodb"),
   ObjectId = mongo.ObjectId;
 (dbName = "ecommerce"), (collection = "products");
 
-// -------------------
-function addingProduct(req, res) {
-  let body ={price:4000,sale:10,brand:"APPLE",description:"Apple MacBook Pro 13 - 2020 '13.3'",qnt:2000, images:["https://i.ibb.co/sjnNn01/main.jpg","https://i.ibb.co/NYP6Kbr/second.jpg","https://i.ibb.co/Zz9M7Bc/third.jpg","https://i.ibb.co/whhtHt6/four.png"]  ,color:"SPACE GRAY",WEIGHT:"1.4Kg",one:"58.2Wh lithium-polymer battery",two:"Apple M1 chip 8-core CPU",INSURANCE:"1 Year by the Official importer" ,category:"laptop"}
-    // if(Object.keys(body).length==)
-
+function validateProduct(req, res, product) {
+  if (Object.keys(product).length != 12) return res.sendStatus(400);
   for (const key in body) {
     const element = body[key];
     if (key == "images") {
@@ -22,7 +19,12 @@ function addingProduct(req, res) {
         return res.status(400).send(`src can not contain spaces`);
       }
     } else {
-      if (element[0] == "" || element == null || element == undefined||element[0]==" ") {
+      if (
+        element[0] == "" ||
+        element == null ||
+        element == undefined ||
+        element[0] == " "
+      ) {
         return res.status(400).send(`${key} is unqualified`);
       }
     }
@@ -39,38 +41,51 @@ function addingProduct(req, res) {
   if (!Number(body.sale) && !Number(body.price)) {
     return res.status(400).send("PRICE AND SALE MUST BE NUMERIC");
   }
+}
+
+function assingingProduct(body) {
+  const product = {
+    WEIGHT: body.WEIGHT,
+    color: body.color,
+    description: body.description,
+    images: body.images,
+    INSURANCE: body.INSURANCE,
+    price: body.price,
+    brand: body.brand,
+    qnt: body.qnt,
+    sale: body.sale,
+    category: body.category,
+    one: body.one,
+    two: body.two,
+  };
+  return product
+}
+
+// POST to DB's products collection a product if validates
+function addingProduct(req,res) {
+  const body=req.body
+  validateProduct(req, res, body);
   client
     .then((db) => {
+      const product=assingingProduct(body)
       const dbo = db.db(dbName);
       dbo
         .collection(collection)
-        .insertOne({
-          WEIGHT: body.WEIGHT,
-          color: body.color,
-          description: body.description,
-          images: body.images,
-          INSURANCE: body.INSURANCE,
-          price: body.price,
-          brand: body.brand,
-          qnt: body.qnt,
-          sale: body.sale,
-          category: body.category,
-          one: body.one,
-          two: body.two,
-        })
+        .insertOne({product})
         .then((data) => {
           return res.send(data);
         });
     })
 
     .catch((err) => {
+      console.log("ERROR AT PRODUCTS:addingProduct ");
       return res.status(400).send(err);
     });
 }
 
-// -----------------------------------------
+// GET all products that match the category 
+// filter using filter that been planted id the server
 function fullCategoryData(req, res, filter) {
-  console.log(1);
   client
     .then((db) => {
       const dbo = db.db(dbName);
@@ -79,17 +94,19 @@ function fullCategoryData(req, res, filter) {
         .find({ category: filter })
         .toArray()
         .then((data) => {
+
           return res.send(data);
         });
     })
     .catch((err) => {
-      console.log(err);
+      console.log("ERROR AT PRODUCTS:fullCategoryData ");
+          console.log(err);
       return res.status(500).send(`site on construction`);
     });
 }
 
-// ------------------------------------------------
 
+// GET all the products from the products collection
 function fullProductsData(req, res) {
   client
     .then((db) => {
@@ -99,49 +116,32 @@ function fullProductsData(req, res) {
         .find({})
         .toArray()
         .then((data) => {
+            if(data.length==0)return res.sendStatus
+            (400)
           return res.send(data);
         });
     })
     .catch((err) => {
+      console.log("ERROR AT PRODUCTS:fullProductsData ");
       console.log(err);
       return res.status(500).send(`site on construction`);
     });
 }
 
 // ---------------------------
+
+      // GET the updated productuct via axios from
+      // CLIENT and using the atomic operator
+      // $set to update the current data
+
+
 function UpdateProduct(req, res) {
   let body = req.body;
-  for (const key in body) {
-    const element = body[key];
-    if (key == "images") {
-      if (
-        element[0].indexOf(" ") >= 0 ||
-        element[1].indexOf(" ") >= 0 ||
-        element[2].indexOf(" ") >= 0 ||
-        element[3].indexOf(" ") >= 0
-      ) {
-        return res.status(400).send(`src can not contain spaces`);
-      }
-    } else {
-      if (element[0] == "" || element == null || element == undefined) {
-        return res.status(400).send(`${key} is unqualified`);
-      }
-    }
-    if (key == "category") {
-      switch (key) {
-        case "laptop":
-          break;
-        default:
-          return res.status(400).send(`${key} is unqualified`);
-      }
-    }
-  }
-  if (!Number(body.sale) && !Number(body.price)) {
-    return res.status(400).send("PRICE AND SALE MUST BE NUMERIC");
-  }
+  validateProduct(req, res, body);
   const ID = req.params.id;
   client
     .then((db) => {
+      const product=assingingProduct(body)
       const dbo = db.db(dbName);
       dbo
         .collection(collection)
@@ -149,23 +149,11 @@ function UpdateProduct(req, res) {
           { _id: mongo.ObjectId(ID) },
           {
             $set: {
-              WEIGHT: body.weight,
-              color: body.color,
-              description: body.description,
-              images: body.images,
-              INSURANCE: body.insurance,
-              price: body.price,
-              brand: body.brand,
-              qnt: body.qnt,
-              sale: body.sale,
-              category: body.category,
-              one: body.one,
-              two: body.two,
+              product
             },
           }
         )
         .then((data) => {
-          // adding modifire change
           if (data.value == null) {
             return res.status(404).send("product not found :/");
           }
@@ -173,11 +161,16 @@ function UpdateProduct(req, res) {
         });
     })
     .catch((err) => {
+      console.log("ERROR AT PRODUCTS:UpdateProduct ");
       return res.status(400).send(err);
     });
 }
 
 // ------------------------------------
+
+        // DELTE the entire document from the collection
+        // using the ID as  param for identification
+
 function deleteProduct(req, res) {
   const ID = req.params.id;
   client
@@ -195,12 +188,14 @@ function deleteProduct(req, res) {
         });
     })
     .catch((err) => {
+      console.log("ERROR AT PRODUCTS:deleteProduct ");
+      console.log(err);
       return res.status(400).send(err);
     });
 }
 
 // ----------------------------------------
-
+//GET the product and render it  to the "product.hbs" page 
 function SingleproductHbs(req, res) {
   const ID = req.params.id;
   client
@@ -208,7 +203,7 @@ function SingleproductHbs(req, res) {
       const dbo = db.db(dbName);
       dbo
         .collection(collection)
-        .findOne({ _id: ObjectId(ID) })
+        .findOne({ _id: ObjectId("618c171c677affe2b08f36c1") })
         .then((data) => {
           res.render("index", {
             description: data.description,
@@ -228,12 +223,15 @@ function SingleproductHbs(req, res) {
         });
     })
     .catch((err) => {
-      console.log(err);
+      console.log("ERROR AT PRODUCTS:singlProductHbs");
+         console.log(err);
       return res.status(404).send(`this ID does not match with any product`);
     });
 }
 
 // ------------------------------------------
+
+//GET the product and render it  to the "update.hbs" page 
 
 function updateSingleProduct(req, res) {
   const ID = req.params.id;
@@ -267,12 +265,16 @@ function updateSingleProduct(req, res) {
         });
     })
     .catch((err) => {
+      console.log("ERROR AT PRODUCTS:updateSingleProduct" );
       console.log(err);
       return res.status(404).send(`this ID does not match with any product`);
     });
 }
 
 // ----------------------------------------------------
+
+// GET the product and return it using the id as a param
+// to filter it out
 function Singleproduct(req, res) {
   const ID = req.params.id;
   client.then((db) => {
@@ -284,6 +286,7 @@ function Singleproduct(req, res) {
         res.send(data);
       })
       .catch((err) => {
+        console.log("ERROR AT PRODUCTS: SINGLE PRODUCT ");
         console.log(err);
         return res.status(404).send(`this ID does not match with any product`);
       });

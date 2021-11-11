@@ -1,4 +1,4 @@
-GET http://localhost:2000/carts
+GET http://localhost:2000/products
 ###
 PATCH  http://localhost:2000/carts
 Content-Type: application/json
