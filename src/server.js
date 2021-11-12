@@ -30,7 +30,7 @@ app.post("/addProduct", (req, res) => {
   products.addingProduct(req, res);
 });
 
-// GET product by tehir category 
+// GET products by tehir category 
 //query string is in the params
 app.get("/products/:category", (req, res) => {
   filter = req.params.category;

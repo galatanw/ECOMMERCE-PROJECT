@@ -5,8 +5,7 @@ const mongo = require("mongodb"),
   ObjectId = mongo.ObjectId;
 (dbName = "ecommerce"), (collection = "products");
 
-function validateProduct(req, res, product) {
-  if (Object.keys(product).length != 12) return res.sendStatus(400);
+function validateProduct(req, res, body) {
   for (const key in body) {
     const element = body[key];
     if (key == "images") {
@@ -16,6 +15,7 @@ function validateProduct(req, res, product) {
         element[2].indexOf(" ") >= 0 ||
         element[3].indexOf(" ") >= 0
       ) {
+        console.log("imgaes",element);
         return res.status(400).send(`src can not contain spaces`);
       }
     } else {
@@ -25,11 +25,12 @@ function validateProduct(req, res, product) {
         element == undefined ||
         element[0] == " "
       ) {
+        console.log("key",key);
         return res.status(400).send(`${key} is unqualified`);
       }
     }
     if (key == "category") {
-      console.log(key);
+      console.log("category" ,element);
       switch (element) {
         case "laptop":
           break;
@@ -58,20 +59,20 @@ function assingingProduct(body) {
     one: body.one,
     two: body.two,
   };
-  return product
+  return product;
 }
 
 // POST to DB's products collection a product if validates
-function addingProduct(req,res) {
-  const body=req.body
+function addingProduct(req, res) {
+  const body = req.body;
   validateProduct(req, res, body);
   client
     .then((db) => {
-      const product=assingingProduct(body)
+      const product = assingingProduct(body);
       const dbo = db.db(dbName);
       dbo
         .collection(collection)
-        .insertOne({product})
+        .insertOne({ product })
         .then((data) => {
           return res.send(data);
         });
@@ -83,7 +84,7 @@ function addingProduct(req,res) {
     });
 }
 
-// GET all products that match the category 
+// GET all products that match the category
 // filter using filter that been planted id the server
 function fullCategoryData(req, res, filter) {
   client
@@ -94,17 +95,15 @@ function fullCategoryData(req, res, filter) {
         .find({ category: filter })
         .toArray()
         .then((data) => {
-
           return res.send(data);
         });
     })
     .catch((err) => {
       console.log("ERROR AT PRODUCTS:fullCategoryData ");
-          console.log(err);
+      console.log(err);
       return res.status(500).send(`site on construction`);
     });
 }
-
 
 // GET all the products from the products collection
 function fullProductsData(req, res) {
@@ -116,8 +115,7 @@ function fullProductsData(req, res) {
         .find({})
         .toArray()
         .then((data) => {
-            if(data.length==0)return res.sendStatus
-            (400)
+          if (data.length == 0) return res.sendStatus(400);
           return res.send(data);
         });
     })
@@ -130,34 +128,30 @@ function fullProductsData(req, res) {
 
 // ---------------------------
 
-      // GET the updated productuct via axios from
-      // CLIENT and using the atomic operator
-      // $set to update the current data
-
+// GET the updated product via axios from
+// CLIENT and using the atomic operator
+// $set to update the current data
 
 function UpdateProduct(req, res) {
   let body = req.body;
   validateProduct(req, res, body);
+  const updateProduct=assingingProduct(body)
   const ID = req.params.id;
   client
     .then((db) => {
-      const product=assingingProduct(body)
+      const product = assingingProduct(body);
       const dbo = db.db(dbName);
       dbo
         .collection(collection)
-        .findOneAndUpdate(
-          { _id: mongo.ObjectId(ID) },
-          {
-            $set: {
-              product
-            },
-          }
-        )
+        .findOneAndUpdate({ _id: mongo.ObjectId(ID) }, { $set: product })
         .then((data) => {
-          if (data.value == null) {
-            return res.status(404).send("product not found :/");
+          console.log("here");
+          if (data.lastErrorObject.updatedExisting != true) {
+            res.status(404).send("product not found :/");
+            return;
           }
-          return res.send(data);
+          res.send(data.value);
+          return;
         });
     })
     .catch((err) => {
@@ -168,8 +162,8 @@ function UpdateProduct(req, res) {
 
 // ------------------------------------
 
-        // DELTE the entire document from the collection
-        // using the ID as  param for identification
+// DELTE the entire document from the collection
+// using the ID as  param for identification
 
 function deleteProduct(req, res) {
   const ID = req.params.id;
@@ -195,7 +189,7 @@ function deleteProduct(req, res) {
 }
 
 // ----------------------------------------
-//GET the product and render it  to the "product.hbs" page 
+//GET the product and render it  to the "product.hbs" page
 function SingleproductHbs(req, res) {
   const ID = req.params.id;
   client
@@ -224,14 +218,14 @@ function SingleproductHbs(req, res) {
     })
     .catch((err) => {
       console.log("ERROR AT PRODUCTS:singlProductHbs");
-         console.log(err);
+      console.log(err);
       return res.status(404).send(`this ID does not match with any product`);
     });
 }
 
 // ------------------------------------------
 
-//GET the product and render it  to the "update.hbs" page 
+//GET the product and render it  to the "update.hbs" page
 
 function updateSingleProduct(req, res) {
   const ID = req.params.id;
@@ -265,7 +259,7 @@ function updateSingleProduct(req, res) {
         });
     })
     .catch((err) => {
-      console.log("ERROR AT PRODUCTS:updateSingleProduct" );
+      console.log("ERROR AT PRODUCTS:updateSingleProduct");
       console.log(err);
       return res.status(404).send(`this ID does not match with any product`);
     });

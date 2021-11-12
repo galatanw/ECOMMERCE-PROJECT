@@ -143,11 +143,11 @@ a{color:inherit;text-decoration:none}
 .foot-lnk{
 	text-align:center;
 }
-@media only screen and (max-width:724px){
+@media only screen and (max-width:1024px){
 	main{
-		height: 120vh;
+		height: 130vh;
 	}
 	.login-html{
-		height: 110vh;
+		height: 120vh;
 	}
 }

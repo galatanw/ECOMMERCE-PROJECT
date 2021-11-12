@@ -18,15 +18,10 @@ function getCategory() {
             <h3>final Price:${
               iterator.price - (iterator.price * iterator.sale) / 100
             } $</h3>
-            <a href="#"><input onclick="deleteProduct('${
-              iterator._id
-            }')" style="color:red" type="button" value="delete"></a>
-            <a href="/singleProudctHbs/${
-              iterator._id
-            }"><input type="button" value="Details"></a>
-            <a href="/singleProductUpdate/${
-              iterator._id
-            }"><input type="button" value="update"></a>
+            <button style="color:red" onclick="deleteProduct('${ iterator._id  }')">
+            DELETE</button>
+            <button><a href="/singleProudctHbs/${iterator._id}">More details</a></button>
+            <button><a href="/singleProductUpdate/${iterator._id}">Update</a></button>      
              </div>
             `;
       i++;
@@ -108,10 +103,10 @@ function sortBySelect(kind) {
             <h3>final Price:${
               iterator.price - (iterator.price * iterator.sale) / 100
             } $</h3>
-            <a href="/singleProudctHbs/${iterator._id}"><input type="button" value="Details"></a>
-            <a href="/singleProductUpdate/${iterator._id}"><input type="button" value="update"></a>
-            <a href="#"><input onclick="deleteProduct('${iterator._id}')"  type="button" value="delete"></a>
-             </div>
+            <button style="color:red" onclick="deleteProduct('${ iterator._id  }')">
+            DELETE</button>
+            <button><a href="/singleProudctHbs/${iterator._id}">More details</a></button>
+            <button><a href="/singleProductUpdate/${iterator._id}">Update</a></button> </div>
             `;
             i++;
           }
@@ -139,10 +134,10 @@ function sortBySelect(kind) {
             <h3>final Price:${
               iterator.price - (iterator.price * iterator.sale) / 100
             } $</h3>
-            <a href="/singleProudctHbs/${iterator._id}"><input type="button" value="Details"></a>
-            <a href="/singleProductUpdate/${iterator._id}"><input type="button" value="update"></a>
-            <a href="#"><input onclick="deleteProduct('${iterator._id}')" style="color:red" type="button" value="delete"></a>
-             </div>
+            <button style="color:red" onclick="deleteProduct('${ iterator._id  }')">
+            DELETE</button>
+            <button><a href="/singleProudctHbs/${iterator._id}">More details</a></button>
+            <button><a href="/singleProductUpdate/${iterator._id}">Update</a></button>  </div>
             `;
             i++;
           }
@@ -166,9 +161,10 @@ function sortBySelect(kind) {
               <h3>final Price:${
                 iterator.price - (iterator.price * iterator.sale) / 100
               } $</h3>
-              <a href="/singleProudctHbs/${iterator._id}"><input type="button" value="Details"></a>
-              <a href="/singleProductUpdate/${iterator._id}"><input type="button" value="update"></a>
-              <a href="#"><input onclick="deleteProduct('${iterator._id}')" style="color:red" type="button" value="delete"></a>
+            <button style="color:red" onclick="deleteProduct('${ iterator._id  }')">
+            DELETE</button>
+            <button><a href="/singleProudctHbs/${iterator._id}">More details</a></button>
+            <button><a href="/singleProductUpdate/${iterator._id}">Update</a></button>
               <h2><span style="color:red">SALE:</sapn><span style="color:gold">${iterator.sale}%</span></h2>
                </div>
                 `;
