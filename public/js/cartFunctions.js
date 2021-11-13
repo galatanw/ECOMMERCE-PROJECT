@@ -3,7 +3,6 @@
 // and then tacking the field and planting them for the client's  cart
 //! THE FINAL PRICE IS A COMPONANT OF THE SUM OF ALL PROUCT PRICE MINUS THE SUM OF ALL THE PRODUCTS'S SALES 
 function buildCart(params) {
-    let sum = 0;
     cartTable.innerHTML = `
   <tr class="terraContainer">
   <th>item</th>
@@ -13,6 +12,7 @@ function buildCart(params) {
     axios
       .get("/singleCart")
       .then((data) => {
+        if(data.status>300)return
         const products = data.data.products;
         sumCart[0].innerHTML = `<h6>${data.data.sum - data.data.sale}</h6>`
         sumCart[1].innerHTML = `<h6>${data.data.shipping}</h6>`

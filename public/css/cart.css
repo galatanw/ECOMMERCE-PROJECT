@@ -1,32 +1,37 @@
-main{
-    margin-top: 2vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+main {
+    padding: 10%;
+  margin-top: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#cartTable th,#cartTable td{
-    border: 1px solid rgb(151, 151, 151);
+#cartTable th,
+#cartTable td {
+  border: 1px solid rgb(151, 151, 151);
 }
-#cartContainer{
-    box-shadow: 0 0 0 100vmax rgba(0,0,0,.3);
-    /* background-color: royalblue; */
+#cartContainer {
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.3);
+  /* background-color: royalblue; */
 }
-#cartTable{
-    width: 100%;
-    overflow-y: scroll;
+#cartTable {
+  width: 100%;
+  overflow: scroll;
 }
-.terraContainer{
-    width: 100%;
-    /* background-color: red; */
+.terraContainer {
+  width: 100%;
+  /* background-color: red; */
 }
-#cartContainer img{
-    width:50%;
+#cartContainer img {
+  width: 50%;
 }
-#finalCartTh , .finalCart{
-    color: white;
-    background-color: hsl(180, 25%, 25%,.8);
-    width: 100%;
+#finalCartTh,
+.finalCart {
+  color: white;
+  background-color: hsl(180, 25%, 25%, 0.8);
+  width: 100%;
 }
-#finalCartTh  , #finalCartTh td ,#finalCartTh th{
-    border: 1px  solid black;
+#finalCartTh,
+#finalCartTh td,
+#finalCartTh th {
+  border: 1px solid black;
 }

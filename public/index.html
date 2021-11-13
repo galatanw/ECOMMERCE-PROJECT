@@ -1,59 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title  id="titleName">laptop</title>
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/products.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>GAL ATANW-LANDPAGE</title>
+  <link rel="stylesheet" href="./css/index.css">
 </head>
+
 <body>
-<header>
-    <div id="nav">
-        <h1 id="myName" style="color: white;">GAL ATNAW</h1>
-        <div id="menuBurger">
-            <div class="menuBurgerBtn"></div>
-        </div>
-        </div>
-        <nav>
-            <ul id="navUl">
-                <li ><a href="/computer"><p class="Navtext">COMPUTER</p></a></li>
-                <li ><a href="/hardwear"><p class="Navtext">HARDWEAR</p></a></li>
-                <li ><a href="/audio"><p class="Navtext">AUDIO</p></a></li>
-                <li ><a href="./cart.html"><p class="Navtext">CART</p></a></li>
-            </ul>
-        </nav>
-        <div id="searchContainer">
-            <input autocomplete="off" id="search" type="search" placeholder="search">
-            <ul id="searchForm">
-            </ul>
-        </div>
-        
-</header>
-<main>
-    <select id="filter">
-        <option>FILTER</option>
-        <option>low to high</option>
-        <option>high to low</option>
-        <option>SALE</option>
-    </select>
-    <input id="resetFilter" type="button" value="reset">
-    <div id="products">
+
+  <header>
+    <div>
+      <p>GAL ATANW</p>
     </div>
-</main>
-<footer>
-    <form id="contactForm">
-		<input id="contactName" name="name" placeholder="What is your name?" class="name" required />
-		<input id="contactEmail" name="emailaddress" placeholder="What is your email?" class="email" type="email" required />
-    <textarea id="contactMessage" rows="4" cols="50" name="subject" placeholder="Please enter your message" class="message" required></textarea>
-    <input name="submit" id ="contacSubmit" type="submit">
-</form>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="js/productsFunctions.js"></script>  
-<script src="js/products.js"></script>  
-<script src="./js/headerFooter.js"></script>
+    <nav>
+      <ul>
+        <li><a href="./laptops.html">laptop</a></li>
+        <li><a href="./hardwar.html">hardwar</a></li>
+        <li><a href="./audio.html">audio</a></li>
+        <li><a href="./desktops">desktops</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="titles">
+
+    <h1>E-COMMRECE</h1>
+    <p>YOU GET THE BEST PRICE WE GET THE BEST COSTUMER</p>
+
+  </section>
+
+  <section class="container-boxes">
+    <div class="box">
+
+
+      <div class="text">
+        <a href="./CREATEandREAD.html">
+          <h3>THE ADMIN</h3>
+          <p>create new products and see the comments</p>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="box">
+
+
+      <div class="text">
+        <a href="./cart.html">
+          <h3>THE CART</h3>
+          <p>get a quick access to your CART</p>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="box">
+
+      <div class="text">
+        <a href="">
+          <h3>THE MAN</h3>
+          <p>get to meet the elite organiztion CEO</p>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
 </body>
+
 </html>

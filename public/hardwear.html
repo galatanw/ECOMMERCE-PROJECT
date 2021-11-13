@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title  id="titleName">hardwear</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/products.css">
+</head>
+<body>
+<header>
+    <div id="nav">
+        <a href="./index.html"><h1 id="myName" style="color: white;">GAL ATNAW</h1></a>
+        <div id="menuBurger">
+            <div class="menuBurgerBtn"></div>
+        </div>
+        </div>
+        <nav>
+            <ul id="navUl">
+                <li ><a href="/desktops.html"><p class="Navtext">DESKTOPS</p></a></li>
+                <li ><a href="/hardwear.html"><p class="Navtext">HARDWEAR</p></a></li>
+                <li ><a href="/audio.html"><p class="Navtext">AUDIO</p></a></li>
+                <li ><a href="./cart.html"><p class="Navtext">CART</p></a></li>
+            </ul>
+        </nav>
+        <div id="searchContainer">
+            <input autocomplete="off" id="search" type="search" placeholder="search">   
+            <ul id="searchForm">
+            </ul>
+        </div>
+        
+</header>
+<main>
+    <select id="filter">
+        <option>FILTER</option>
+        <option>low to high</option>
+        <option>high to low</option>
+        <option>SALE</option>
+    </select>
+    <input id="resetFilter" type="button" value="reset">
+    <div id="products">
+    </div>
+</main>
+<footer>
+    <form id="contactForm">
+		<input id="contactName" name="name" placeholder="What is your name?" class="name" required />
+		<input id="contactEmail" name="emailaddress" placeholder="What is your email?" class="email" type="email" required />
+    <textarea id="contactMessage" rows="4" cols="50" name="subject" placeholder="Please enter your message" class="message" required></textarea>
+    <input name="submit" id ="contacSubmit" type="submit">
+</form>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="js/productsFunctions.js"></script>  
+<script src="js/products.js"></script>  
+<script src="./js/headerFooter.js"></script>
+</body>
+</html>

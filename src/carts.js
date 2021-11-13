@@ -37,7 +37,7 @@ function getSingleCart(req,res) {
       .collection("carts")
       .findOne({_id:ObjectId("618d8abc6952a1b331f2bf2f")})
       .then((data) => {
-        
+        console.log(data);
         if(data.value=="")return res.sendStatus(404)
         return res.send(data);
       });

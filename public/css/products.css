@@ -16,10 +16,8 @@ main{
   align-items: center;
   flex-flow: column;
   width: 30%;
-  border: 3px solid purple;
+  border: 2px solid black;
   overflow:hidden;
-  background-color:white;
-  box-shadow: 10px 10px 0px hsla(240, 72%, 39%, 0.4);;
   text-align: center;
   transition: all .5s;
   font-family: 'Lora', serif;
@@ -58,7 +56,9 @@ main{
 .productsPreview a:active{
   color:dimgray;
 }
-
+#filter{
+  margin-left: 40vw;
+}
 @media only screen and (max-width:768px) {
   main{
     padding: 20px;
