@@ -31,6 +31,7 @@ function buildCart(params) {
       } USD</h1>
       <td style="border: none; "><button onClick="plus('${element._id}')">
       <h1>+</h1></button><button onClick="minus('${element._id}')" style="margin-left:5px"><h1>-</h1></button>
+      <h1>x</h1></button><button onClick="removeFromCart('${element._id}')" style="margin-left:5px"><h1>-</h1></button>
       </td >
       `;
         }
@@ -109,6 +110,17 @@ function buildCart(params) {
         console.log(err);
       });
     return;
+  }
+  function removeFromCart(ID,sale,price){
+    axios
+    .patch(`/carts/deleteOneProduct/${ID}`,{price,sale})
+    .then((data)=>{
+  
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+    .then()
   }
   function removeFromCart(ID,sale,price){
     axios

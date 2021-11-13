@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Mina:400,700');
-
+main{
+  width: 80%;
+}
 .row {margin: 0; padding: 0; max-width: 100%;}
 .row .row {margin: 0; padding: 0;}
 .row .columns {padding: 0;}
@@ -28,6 +30,7 @@ box-shadow: 2vh 2vh 5vh white;}
 .blocks {display: flex;}
 .block {padding:35px; width: 50%;}
 .block.nopad {padding: 0;}
+.block.nopad img{width: 100%;}
 
 .options {padding: 35px;}
 .options h2 {font-size: 1.25em;}
