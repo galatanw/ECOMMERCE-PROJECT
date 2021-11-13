@@ -64,7 +64,6 @@ main{
     padding: 20px;
   }
     #products{
-      background-image: linear-gradient( 135deg, #90F7EC 10%, #32CCBC 100%);
         flex-direction: column;
         justify-content: center;
         align-content: center;
