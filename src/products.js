@@ -34,6 +34,12 @@ function validateProduct(req, res, body) {
       switch (element) {
         case "laptop":
           break;
+          case "hardware":
+          break;
+          case "computer":
+          break;
+          case "audio":
+          break;
         default:
           return res.status(400).send(`${key} is unqualified`);
       }
@@ -72,7 +78,7 @@ function addingProduct(req, res) {
       const dbo = db.db(dbName);
       dbo
         .collection(collection)
-        .insertOne({ product })
+        .insertOne( product)
         .then((data) => {
           return res.send(data);
         });

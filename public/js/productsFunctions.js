@@ -5,6 +5,7 @@
 //! THE FINAL PRICE IS A COMPONANT OF THE SUM OF ALL PROUCT PRICE MINUS THE SUM OF ALL THE PRODUCTS'S SALES
 function getCategory() {
   axios.get(`/products/${category}`).then((res) => {
+    let i=0
     for (const iterator of res.data) {
       productsImages.push([iterator.images[0], iterator.images[1]]);
       div.innerHTML += `
@@ -18,7 +19,7 @@ function getCategory() {
             <h3>final Price:${
               iterator.price - (iterator.price * iterator.sale) / 100
             } $</h3>
-            <button style="color:red" onclick="deleteProduct('${ iterator._id  }')">
+            <button style="color:red" onclick="deleteProduct('${ iterator._id  }',${i})">
             DELETE</button>
             <button><a href="/singleProudctHbs/${iterator._id}">More details</a></button>
             <button><a href="/singleProductUpdate/${iterator._id}">Update</a></button>      
@@ -48,14 +49,15 @@ function hoverImage(x) {
 // the product's ID would delete the requsted product from the collection
 // THE DELETE REQUIERS CONFIRMATION AND ASK TO TYPE THE ID IN THE PROMT VAR
 // THEN BEEN QUERIED IF true THE PRODUCT WOULD BE DELETED
-function deleteProduct(id){
-    const verify=prompt(id)
+function deleteProduct(id,index){
+  const Deletedproduct=document.getElementsByClassName("productsPreview")  
+  const verify=prompt(id)
     if(verify==id){
     axios
     .delete(`/products/${id}`)
     .then((res) => {
+      Deletedproduct[index].style.display='none'
       alert("delted");
-      getCategory()
   })
   .catch((err)=>{
     console.log(err);
@@ -79,7 +81,7 @@ function deleteProduct(id){
 
 function sortBySelect(kind) {
     productsImages = [];
-    i = 0;
+   let i = 0;
     switch (kind) {
       case "lowest":
         axios.get(`/products/${category}`).then((res) => {

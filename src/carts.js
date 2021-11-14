@@ -106,12 +106,9 @@ function changeQnt(req, res) {
   const SALE = req.body.sale;
   const SUM = req.body.sum;
   const ID = req.params.id;
-    let updatedQnt;
+  let  updatedQnt = {$set: { "products.$.qnt": QNT,sale:SALE,sum:SUM,shipping:25 }}
   if(SUM>=20000){
     updatedQnt =  {$set: { "products.$.qnt": QNT,sale:SALE,sum:SUM,shipping:0}}
-  }
-  else{
-    updatedQnt = {$set: { "products.$.qnt": QNT,sale:SALE,sum:SUM,shipping:25 }}
   }
   const myCart = {_id:ObjectId("618d8abc6952a1b331f2bf2f"), "products._id": ID};
   client

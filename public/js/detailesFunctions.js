@@ -4,7 +4,7 @@ function bought(ID) {
   axios.get(`/singleCart`).then((data) => {
     console.log(data);
     for (const iterator of data.data.products) {
-      if ((iterator._id = ID)) {
+      if ((iterator._id ==ID)) {
         quant = Number(amount.value) + Number(iterator.qnt);
         sum =
           Number(iterator.price) * Number(amount.value) + Number(data.data.sum);
