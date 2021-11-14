@@ -14,7 +14,7 @@ function buildCart(params) {
       .then((data) => {
         if(data.status>300)return
         const products = data.data.products;
-        sumCart[0].innerHTML = `<h6>${data.data.sum - data.data.sale}</h6>`
+        sumCart[0].innerHTML = `<h6>${data.data.sale}</h6>`
         sumCart[1].innerHTML = `<h6>${data.data.shipping}</h6>`
         sumCart[2].innerHTML = `<h6>${data.data.sum-data.data.sale}</h6>`
         for (let index = 0; index < products.length; index++) {
@@ -31,7 +31,6 @@ function buildCart(params) {
       } USD</h1>
       <td style="border: none; "><button onClick="plus('${element._id}')">
       <h1>+</h1></button><button onClick="minus('${element._id}')" style="margin-left:5px"><h1>-</h1></button>
-      <h1>x</h1></button><button onClick="removeFromCart('${element._id}')" style="margin-left:5px"><h1>-</h1></button>
       </td >
       `;
         }
